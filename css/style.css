@@ -659,6 +659,7 @@ nav a.active {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 12px;
+    align-items: start;
 }
 .faq-item {
     border: 1px solid var(--gray-200);

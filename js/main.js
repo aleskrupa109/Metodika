@@ -94,10 +94,12 @@ function renderDocuments() {
         docs = docs.filter(d => d.audience && d.audience.includes(currentAudience));
     }
 
-    // Sort
+    // Sort – pinned documents always first
     const sortSelect = document.getElementById('sort-select');
     const sortDir = sortSelect ? sortSelect.value : 'newest';
     docs.sort((a, b) => {
+        if (a.pinned && !b.pinned) return -1;
+        if (!a.pinned && b.pinned) return 1;
         const da = new Date(a.dateUpdated || a.date);
         const db = new Date(b.dateUpdated || b.date);
         return sortDir === 'newest' ? db - da : da - db;

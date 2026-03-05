@@ -16,7 +16,6 @@
             grid-template-columns: 1fr 320px;
             gap: 32px;
         }
-        .doc-detail-main {}
         .doc-detail-main h1 {
             font-size: 1.8rem;
             color: var(--cz-blue);
@@ -56,14 +55,8 @@
             font-weight: 700;
         }
         .doc-body p { margin-bottom: 14px; }
-        .doc-body ul, .doc-body ol {
-            margin-bottom: 14px;
-            padding-left: 24px;
-        }
-        .doc-body li { margin-bottom: 6px; }
 
         /* Sidebar */
-        .doc-detail-sidebar {}
         .sidebar-card {
             background: var(--white);
             border: 1px solid var(--gray-200);
@@ -97,6 +90,10 @@
             background: var(--cz-blue);
         }
         .download-btn.secondary:hover { background: var(--cz-blue-dark); }
+        .download-btn.green {
+            background: #027a48;
+        }
+        .download-btn.green:hover { background: #015c36; }
         .related-item {
             padding: 12px 0;
             border-bottom: 1px solid var(--gray-100);
@@ -135,76 +132,10 @@
 <section class="doc-detail">
     <div class="container">
         <div class="doc-detail-grid">
-            <div class="doc-detail-main">
-                <div class="doc-tags" style="margin-bottom: 14px;">
-                    <span class="doc-tag">Stavební řád</span>
-                    <span class="doc-tag">OZE</span>
-                    <span class="doc-tag">Věcná příslušnost</span>
-                    <span class="doc-tag">§ 172</span>
-                </div>
-                <h1>Výklad k § 172 odst. 3 stavebního zákona – stavební povolení pro OZE</h1>
-
-                <div class="doc-detail-meta">
-                    <div class="meta-item">
-                        <strong>Datum vydání</strong>
-                        15. 2. 2026
-                    </div>
-                    <div class="meta-item">
-                        <strong>Typ</strong>
-                        Výkladové stanovisko
-                    </div>
-                    <div class="meta-item">
-                        <strong>Autor</strong>
-                        Oddělení metodiky SR
-                    </div>
-                    <div class="meta-item">
-                        <strong>Platnost</strong>
-                        <span class="doc-status platne" style="display:inline-block;">Platné</span>
-                    </div>
-                </div>
-
-                <div class="doc-body">
-                    <!-- SEM VLOŽTE SKUTEČNÝ OBSAH DOKUMENTU -->
-                    <p>Toto stanovisko řeší otázku věcné příslušnosti u fotovoltaických elektráren s výkonem nad 1 MW a bateriových úložišť. Upřesňuje hranici mezi kompetencí obecného stavebního úřadu a ÚRÚ po 1. 7. 2026.</p>
-
-                    <h2>1. Právní rámec</h2>
-                    <p>Podle § 172 odst. 3 nového stavebního zákona (zákon č. 283/2021 Sb.) spadají do kategorie vyhrazených staveb mj. výrobny elektřiny s instalovaným výkonem nad 1 MW.</p>
-
-                    <h2>2. Věcná příslušnost</h2>
-                    <p>Pro stavby spadající do kategorie vyhrazených staveb je věcně příslušným stavebním úřadem Úřad rozvoje území České republiky (ÚRÚ).</p>
-
-                    <h2>3. Praktické dopady</h2>
-                    <p>Žádosti o stavební povolení pro FVE nad 1 MW se od 1. 7. 2026 podávají přímo na ÚRÚ.</p>
-                </div>
+            <div class="doc-detail-main" id="doc-main">
+                <p class="loading-msg">Načítání dokumentu...</p>
             </div>
-
-            <div class="doc-detail-sidebar">
-                <div class="sidebar-card">
-                    <h3>Ke stažení</h3>
-                    <a href="../documents/" class="download-btn">Stáhnout PDF (1.2 MB)</a>
-                    <a href="video.html?id=1" class="download-btn secondary">Video výklad (12 min)</a>
-                </div>
-
-                <div class="sidebar-card">
-                    <h3>Související dokumenty</h3>
-                    <div class="related-item">
-                        <a href="document.html?id=2">Metodický pokyn k přechodnému období</a>
-                        <div class="related-meta">28. 1. 2026 · Metodický pokyn</div>
-                    </div>
-                    <div class="related-item">
-                        <a href="document.html?id=3">Integrace DO do stavebního řízení</a>
-                        <div class="related-meta">10. 1. 2026 · Informační materiál</div>
-                    </div>
-                </div>
-
-                <div class="sidebar-card">
-                    <h3>Kontakt na garanta</h3>
-                    <p style="font-size:0.87rem; color:var(--gray-600); margin-bottom: 12px;">
-                        <strong style="color:var(--gray-900);">Ing. Jana Nováková</strong><br>
-                        Vedoucí oddělení metodiky SR
-                    </p>
-                    <a href="#" class="contact-link">Kontaktovat</a>
-                </div>
+            <div class="doc-detail-sidebar" id="doc-sidebar">
             </div>
         </div>
     </div>
@@ -215,6 +146,112 @@
 
 <script src="../js/components.js"></script>
 <script src="../js/main.js"></script>
+<script>
+(function() {
+    const params = new URLSearchParams(window.location.search);
+    const docId = parseInt(params.get('id'));
+    if (!docId) {
+        document.getElementById('doc-main').innerHTML = '<p>Dokument nebyl nalezen.</p>';
+        return;
+    }
+
+    fetch('../data/documents.json')
+        .then(r => r.json())
+        .then(data => {
+            const docs = data.documents || [];
+            const doc = docs.find(d => d.id === docId);
+            if (!doc) {
+                document.getElementById('doc-main').innerHTML = '<p>Dokument nebyl nalezen.</p>';
+                return;
+            }
+
+            // Format date
+            function fmtDate(iso) {
+                if (!iso) return '';
+                const d = new Date(iso);
+                return d.toLocaleDateString('cs-CZ', { day: 'numeric', month: 'numeric', year: 'numeric' });
+            }
+
+            const statusLabels = { 'platne': 'Platné', 'nahrazene': 'Nahrazeno', 'zrusene': 'Zrušené' };
+
+            // --- MAIN CONTENT ---
+            const tags = (doc.tags || []).map(t => `<span class="doc-tag">${t}</span>`).join('');
+            document.getElementById('doc-main').innerHTML = `
+                <div class="doc-tags" style="margin-bottom: 14px;">${tags}</div>
+                <h1>${doc.title}</h1>
+                <div class="doc-detail-meta">
+                    <div class="meta-item">
+                        <strong>Datum vydání</strong>
+                        ${fmtDate(doc.date)}
+                    </div>
+                    ${doc.dateUpdated ? `<div class="meta-item"><strong>Aktualizace</strong>${fmtDate(doc.dateUpdated)}</div>` : ''}
+                    <div class="meta-item">
+                        <strong>Typ</strong>
+                        ${doc.type || ''}
+                    </div>
+                    <div class="meta-item">
+                        <strong>Autor</strong>
+                        ${doc.author || ''}
+                    </div>
+                    <div class="meta-item">
+                        <strong>Platnost</strong>
+                        <span class="doc-status ${doc.status}" style="display:inline-block;">${statusLabels[doc.status] || doc.status}</span>
+                    </div>
+                </div>
+                <div class="doc-body">
+                    <p>${doc.excerpt || ''}</p>
+                    ${doc.sourceUrl ? `<p style="margin-top:20px;"><a href="${doc.sourceUrl}" target="_blank" style="color:var(--cz-blue); font-weight:500;">Zobrazit na stránkách ÚÚR &rarr;</a></p>` : ''}
+                </div>
+            `;
+
+            // Update page title
+            document.title = `ÚRÚ – ${doc.title}`;
+
+            // --- SIDEBAR ---
+            let sidebarHTML = '<div class="sidebar-card"><h3>Ke stažení</h3>';
+
+            if (doc.pdfFile) {
+                const sizeStr = doc.pdfSize ? ` (${doc.pdfSize})` : '';
+                sidebarHTML += `<a href="../${doc.pdfFile}" class="download-btn" target="_blank">Stáhnout PDF${sizeStr}</a>`;
+            }
+            if (doc.infographic) {
+                sidebarHTML += `<a href="../${doc.infographic}" class="download-btn green" target="_blank">Infografika</a>`;
+            }
+            if (doc.videoFile) {
+                sidebarHTML += `<a href="../${doc.videoFile}" class="download-btn secondary" target="_blank">Video výklad (MP4)</a>`;
+            } else if (doc.videoId) {
+                sidebarHTML += `<a href="video.html?id=${doc.videoId}" class="download-btn secondary">Video výklad</a>`;
+            }
+            if (doc.sourceUrl) {
+                sidebarHTML += `<a href="${doc.sourceUrl}" class="download-btn" style="background:var(--gray-600);" target="_blank">Zdroj – ÚÚR</a>`;
+            }
+
+            sidebarHTML += '</div>';
+
+            // Related documents
+            if (doc.relatedIds && doc.relatedIds.length > 0) {
+                sidebarHTML += '<div class="sidebar-card"><h3>Související dokumenty</h3>';
+                doc.relatedIds.forEach(rid => {
+                    const rel = docs.find(d => d.id === rid);
+                    if (rel) {
+                        sidebarHTML += `
+                            <div class="related-item">
+                                <a href="document.html?id=${rel.id}">${rel.title}</a>
+                                <div class="related-meta">${fmtDate(rel.date)} · ${rel.type || ''}</div>
+                            </div>`;
+                    }
+                });
+                sidebarHTML += '</div>';
+            }
+
+            document.getElementById('doc-sidebar').innerHTML = sidebarHTML;
+        })
+        .catch(err => {
+            console.error('Chyba:', err);
+            document.getElementById('doc-main').innerHTML = '<p>Nepodařilo se načíst dokument.</p>';
+        });
+})();
+</script>
 
 </body>
 </html>

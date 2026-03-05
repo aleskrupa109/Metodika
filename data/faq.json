@@ -1,0 +1,53 @@
+{
+  "_comment": "Databáze FAQ – přidávejte skutečné otázky a odpovědi",
+  "faq": [
+    {
+      "id": 1,
+      "question": "Jak se mění stavební povolení po 1. 7. 2026?",
+      "answer": "Od 1. 7. 2026 se stavební povolení vydává podle nového stavebního zákona. Hlavní změnou je integrace dotčených orgánů přímo do řízení – stavebník již nebude muset separátně obstarávat závazná stanoviska. Lhůty pro vydání rozhodnutí se zkracují na 30/60 dní dle kategorie stavby.",
+      "category": "stavebni-rad",
+      "categoryLabel": "Stavební řád",
+      "categoryClass": "sr"
+    },
+    {
+      "id": 2,
+      "question": "Co se stane s řízeními zahájenými před 1. 7.?",
+      "answer": "Řízení zahájená před 1. 7. 2026 se dokončí podle dosavadních předpisů. Pokud nebylo vydáno rozhodnutí do 1. 7., spis se předá věcně příslušnému orgánu dle nového zákona. Podrobnosti upravují přechodná ustanovení § 325–329 nového stavebního zákona.",
+      "category": "prechod",
+      "categoryLabel": "Přechod",
+      "categoryClass": "prechod"
+    },
+    {
+      "id": 3,
+      "question": "Kdo je dotčeným orgánem a jak se to mění?",
+      "answer": "Dotčené orgány (hygienici, hasiči, ochrana přírody, památkáři aj.) od 1. 7. 2026 vydávají vyjádření místo závazných stanovisek. Ruší se jednotné environmentální stanovisko (JES). Dotčené orgány se stávají součástí integrovaného řízení.",
+      "category": "stavebni-rad",
+      "categoryLabel": "Stavební řád",
+      "categoryClass": "sr"
+    },
+    {
+      "id": 4,
+      "question": "Kdo je nyní metodickým garantem pro ÚP?",
+      "answer": "Od 1. 7. 2026 přechází metodická podpora pro územní plánování z MMR na ÚRÚ. Metodickým garantem pro územní plánování je Oddělení územního plánování ÚRÚ. Kontakty na jednotlivé metodiky najdete v sekci Kontakty na metodiky.",
+      "category": "uzemni-planovani",
+      "categoryLabel": "Územní plán.",
+      "categoryClass": "up"
+    },
+    {
+      "id": 5,
+      "question": "Spadá FVE nad 1 MW pod kompetenci ÚRÚ?",
+      "answer": "Ano, fotovoltaické elektrárny s instalovaným výkonem nad 1 MW spadají do kategorie vyhrazených staveb a řízení vede ÚRÚ. Bateriová úložiště nad stanovenou kapacitu rovněž. Podrobnosti viz Výklad k § 172 odst. 3 stavebního zákona.",
+      "category": "stavebni-rad",
+      "categoryLabel": "Stavební řád",
+      "categoryClass": "sr"
+    },
+    {
+      "id": 6,
+      "question": "Kde najdu nové vzory dokumentů?",
+      "answer": "Vzory dokumentů pro nová řízení jsou ke stažení v sekci Metodická stanoviska pod filtrem „Vzorový dokument". Každý vzor je doplněn o komentář a video výklad s vysvětlením správného vyplnění.",
+      "category": "prechod",
+      "categoryLabel": "Přechod",
+      "categoryClass": "prechod"
+    }
+  ]
+}

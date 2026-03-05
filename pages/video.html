@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ÚRÚ – Video výklad</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/style.css">
+    <style>
+        .video-detail { padding: 40px 0 60px; }
+        .video-player {
+            width: 100%;
+            aspect-ratio: 16/9;
+            background: var(--gray-900);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 28px;
+            position: relative;
+        }
+        .video-player .play-btn {
+            width: 80px;
+            height: 80px;
+            font-size: 2rem;
+        }
+        .video-player .placeholder-text {
+            position: absolute;
+            bottom: 20px;
+            left: 20px;
+            color: rgba(255,255,255,0.5);
+            font-size: 0.85rem;
+        }
+        .video-info h1 {
+            font-size: 1.6rem;
+            color: var(--cz-blue);
+            margin-bottom: 12px;
+            font-weight: 700;
+        }
+        .video-meta {
+            display: flex;
+            gap: 20px;
+            margin-bottom: 20px;
+            font-size: 0.85rem;
+            color: var(--gray-400);
+        }
+        .video-description {
+            font-size: 0.95rem;
+            color: var(--gray-600);
+            line-height: 1.7;
+            padding: 20px 0;
+            border-top: 1px solid var(--gray-200);
+        }
+        .related-videos {
+            margin-top: 40px;
+            padding-top: 32px;
+            border-top: 1px solid var(--gray-200);
+        }
+        .related-videos h2 {
+            font-size: 1.2rem;
+            color: var(--cz-blue);
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+    </style>
+</head>
+<body>
+
+<div id="site-header"></div>
+
+<div class="container">
+    <div class="breadcrumb">
+        <a href="../index.html">Úvod</a> &rsaquo;
+        <a href="../index.html">Metodická podpora</a> &rsaquo;
+        <a href="../index.html#multimedia">Video výklady</a> &rsaquo;
+        <strong>Video výklad</strong>
+    </div>
+</div>
+
+<section class="video-detail">
+    <div class="container">
+        <!-- VIDEO PLAYER – nahradit iframe s YouTube/Vimeo embedem -->
+        <div class="video-player">
+            <div class="play-btn">&#9654;</div>
+            <span class="placeholder-text">Sem vložte YouTube/Vimeo embed &lt;iframe&gt;</span>
+        </div>
+
+        <div class="video-info">
+            <div class="doc-tags" style="margin-bottom: 12px;">
+                <span class="doc-tag">Video</span>
+                <span class="doc-tag">Stavební řád</span>
+                <span class="doc-tag">Dotčené orgány</span>
+            </div>
+            <h1>Integrace dotčených orgánů – co se mění v praxi</h1>
+            <div class="video-meta">
+                <span>12:34</span>
+                <span>Publikováno: 15. 2. 2026</span>
+                <span>Oddělení metodiky SR</span>
+            </div>
+            <div class="video-description">
+                <p>Srozumitelný výklad hlavních změn pro stavební úřady i dotčené orgány po 1. 7. 2026. Video pokrývá integraci dotčených orgánů do stavebního řízení, zrušení JES a nové procesní postupy.</p>
+                <p style="margin-top: 12px;"><strong>Související dokument:</strong> <a href="document.html?id=3" style="color: var(--cz-blue);">Integrace dotčených orgánů do stavebního řízení – praktický průvodce</a></p>
+            </div>
+        </div>
+
+        <div class="related-videos">
+            <h2>Další video výklady</h2>
+            <div class="media-grid">
+                <div class="media-card">
+                    <div class="media-thumbnail podcast">
+                        <div class="play-btn">&#9654;</div>
+                        <span class="media-badge">Podcast</span>
+                        <span class="media-duration">22:15</span>
+                    </div>
+                    <div class="media-body">
+                        <h4>Přechodové období – rozhovor s ředitelem úřadu</h4>
+                        <p>Diskuze nad nejčastějšími otázkami k přechodnému období.</p>
+                    </div>
+                </div>
+                <div class="media-card">
+                    <div class="media-thumbnail" style="background: var(--cz-red);">
+                        <div class="play-btn">&#9654;</div>
+                        <span class="media-badge">Video</span>
+                        <span class="media-duration">8:45</span>
+                    </div>
+                    <div class="media-body">
+                        <h4>Územní plánování po novele – průvodce pro obce</h4>
+                        <p>Kompaktní video výklad zaměřený na obce.</p>
+                    </div>
+                </div>
+                <div class="media-card">
+                    <div class="media-thumbnail">
+                        <div class="play-btn">&#9654;</div>
+                        <span class="media-badge">Video</span>
+                        <span class="media-duration">15:20</span>
+                    </div>
+                    <div class="media-body">
+                        <h4>Věcná příslušnost – hraniční případy OZE</h4>
+                        <p>Praktické příklady posuzování věcné příslušnosti.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<div id="site-footer"></div>
+<div id="site-chatbot"></div>
+
+<script src="../js/components.js"></script>
+<script src="../js/main.js"></script>
+
+</body>
+</html>

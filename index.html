@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ÚRÚ – Metodická podpora</title>
+    <!-- Czechia Sans™ není veřejně dostupný webfont – v produkci nahradit.
+         Pro mockup používáme Inter jako nejbližší aproximaci. -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<!-- SHARED HEADER (rendered by components.js) -->
+<div id="site-header"></div>
+
+<!-- BREADCRUMB -->
+<div class="container">
+    <div class="breadcrumb">
+        <a href="#">Úvod</a> &rsaquo; <strong>Metodická podpora</strong>
+    </div>
+</div>
+
+<!-- HERO -->
+<section class="hero">
+    <div class="container">
+        <h1>Metodická podpora</h1>
+        <p>Výklady stavebního zákona, metodická stanoviska a podpora pro stavební úřady, dotčené orgány a obce v oblasti územního plánování.</p>
+        <div class="search-bar">
+            <input type="text" placeholder="Hledejte v metodických dokumentech, FAQ, výkladech...">
+            <button>Vyhledat</button>
+        </div>
+        <div class="hero-tags">
+            <span class="hero-tag">Stavební řád</span>
+            <span class="hero-tag">Územní plánování</span>
+            <span class="hero-tag">Přechodné ustanovení</span>
+            <span class="hero-tag">Dotčené orgány</span>
+            <span class="hero-tag">Integrace DO</span>
+            <span class="hero-tag">EIA</span>
+        </div>
+    </div>
+</section>
+
+<!-- AUDIENCE CARDS -->
+<section class="audience-section">
+    <div class="container">
+        <div class="section-intro">
+            <h2>Vyberte svou oblast</h2>
+            <p>Zobrazíme vám obsah relevantní pro vaši agendu</p>
+        </div>
+        <div class="audience-cards">
+            <div class="audience-card active" data-audience="stavebni-urady" onclick="selectAudience(this)">
+                <div class="card-icon">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 21h18M3 7v14M21 7v14M6 7V4l6-2 6 2v3M9 21v-4h6v4M9 11h.01M15 11h.01M9 15h.01M15 15h.01"/></svg>
+                </div>
+                <h3>Stavební úřady</h3>
+                <p>Výklady nového stavebního zákona, metodická stanoviska, přechodová ustanovení, vzory dokumentů</p>
+            </div>
+            <div class="audience-card" data-audience="uzemni-planovani" onclick="selectAudience(this)">
+                <div class="card-icon">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
+                </div>
+                <h3>Územní plánování</h3>
+                <p>Metodika pro obce jako pořizovatele územních plánů, podklady, kontakty na garanty</p>
+            </div>
+            <div class="audience-card" data-audience="dotcene-organy" onclick="selectAudience(this)">
+                <div class="card-icon">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2M9 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM22 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+                </div>
+                <h3>Dotčené orgány</h3>
+                <p>Změny v typech vyjádření, integrace do řízení, zrušení JES, nové postupy od 1. 7. 2026</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- MAIN CONTENT WITH FILTERS -->
+<section class="content-section">
+    <div class="container">
+
+        <!-- TRANSITION BANNER -->
+        <div class="transition-banner">
+            <div class="banner-icon">!</div>
+            <div>
+                <h3>Přechodové období – k 1. 7. 2026</h3>
+                <p>Jak se mění řízení zahájená před 1. 7. 2026? Co platí pro rozdělaná řízení? Jaké jsou nové povinnosti? Přehled klíčových změn a instrukcí pro přechodové období.</p>
+                <a href="#">Zobrazit přechodové instrukce &rarr;</a>
+            </div>
+        </div>
+
+        <div class="content-grid">
+            <!-- SIDEBAR -->
+            <aside class="sidebar">
+                <h3>Filtrovat</h3>
+
+                <div class="filter-group">
+                    <label>Oblast práva</label>
+                    <select>
+                        <option>Všechny oblasti</option>
+                        <option>Stavební řád</option>
+                        <option>Územní plánování</option>
+                        <option>Ochrana přírody</option>
+                        <option>EIA</option>
+                        <option>Památková péče</option>
+                        <option>Vodní hospodářství</option>
+                    </select>
+                </div>
+
+                <div class="filter-group">
+                    <label>Typ dokumentu</label>
+                    <select>
+                        <option>Všechny typy</option>
+                        <option>Metodické stanovisko</option>
+                        <option>Výkladové stanovisko</option>
+                        <option>Metodický pokyn</option>
+                        <option>Vzorový dokument</option>
+                        <option>Informační materiál</option>
+                    </select>
+                </div>
+
+                <div class="filter-group">
+                    <label>Platnost</label>
+                    <div class="filter-tags">
+                        <span class="filter-tag active">Platné</span>
+                        <span class="filter-tag">Nahrazené</span>
+                        <span class="filter-tag">Všechny</span>
+                    </div>
+                </div>
+
+                <div class="filter-group">
+                    <label>Rok vydání</label>
+                    <select>
+                        <option>Všechny roky</option>
+                        <option>2026</option>
+                        <option>2025</option>
+                        <option>2024</option>
+                        <option>Starší</option>
+                    </select>
+                </div>
+
+                <div class="filter-group">
+                    <label>Ustanovení zákona</label>
+                    <select>
+                        <option>Všechna ustanovení</option>
+                        <option>§ 172 – Stavební povolení</option>
+                        <option>§ 184 – Územní řízení</option>
+                        <option>§ 196 – Kolaudace</option>
+                        <option>§ 200 – Změna stavby</option>
+                    </select>
+                </div>
+
+                <button class="filter-reset">Zrušit všechny filtry</button>
+            </aside>
+
+            <!-- CONTENT -->
+            <div class="main-content">
+                <div class="content-tabs">
+                    <button class="content-tab active" onclick="switchTab(this, 'documents')">
+                        Dokumenty <span class="badge">47</span>
+                    </button>
+                    <button class="content-tab" onclick="switchTab(this, 'faq')">
+                        FAQ <span class="badge">23</span>
+                    </button>
+                    <button class="content-tab" onclick="switchTab(this, 'video')">
+                        Video <span class="badge">8</span>
+                    </button>
+                    <button class="content-tab" onclick="switchTab(this, 'podcast')">
+                        Podcasty <span class="badge">5</span>
+                    </button>
+                </div>
+
+                <div class="results-bar">
+                    <span id="results-summary">Zobrazeno <strong>–</strong> dokumentů</span>
+                    <select id="sort-select">
+                        <option value="newest">Řadit: Nejnovější</option>
+                        <option value="oldest">Řadit: Nejstarší</option>
+                    </select>
+                </div>
+
+                <!-- Document list – dynamically rendered from data/documents.json -->
+                <div class="doc-list" id="content-documents">
+                    <p class="loading-msg">Načítání dokumentů...</p>
+                </div>
+
+                <div class="pagination">
+                    <a href="#" class="active">1</a>
+                    <a href="#">2</a>
+                    <a href="#">3</a>
+                    <a href="#">4</a>
+                    <a href="#">&rarr;</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- FAQ SECTION -->
+<section class="faq-section" id="faq">
+    <div class="container">
+        <div class="section-intro">
+            <h2>Často kladené dotazy</h2>
+            <p>Odpovědi na nejčastější otázky ke stavebnímu řádu, územnímu plánování a přechodnému období</p>
+        </div>
+
+        <div class="faq-grid">
+            <div class="faq-item open">
+                <div class="faq-question" onclick="toggleFaq(this)">
+                    <span><span class="faq-category-tag sr">Stavební řád</span> Jak se mění stavební povolení po 1. 7. 2026?</span>
+                    <span class="arrow">&#9660;</span>
+                </div>
+                <div class="faq-answer">
+                    Od 1. 7. 2026 se stavební povolení vydává podle nového stavebního zákona. Hlavní změnou je integrace dotčených orgánů přímo do řízení – stavebník již nebude muset separátně obstarávat závazná stanoviska. Lhůty pro vydání rozhodnutí se zkracují na 30/60 dní dle kategorie stavby.
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFaq(this)">
+                    <span><span class="faq-category-tag prechod">Přechod</span> Co se stane s řízeními zahájenými před 1. 7.?</span>
+                    <span class="arrow">&#9660;</span>
+                </div>
+                <div class="faq-answer">
+                    Řízení zahájená před 1. 7. 2026 se dokončí podle dosavadních předpisů. Pokud nebylo vydáno rozhodnutí do 1. 7., spis se předá věcně příslušnému orgánu dle nového zákona. Podrobnosti upravují přechodná ustanovení § 325–329 nového stavebního zákona.
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFaq(this)">
+                    <span><span class="faq-category-tag sr">Stavební řád</span> Kdo je dotčeným orgánem a jak se to mění?</span>
+                    <span class="arrow">&#9660;</span>
+                </div>
+                <div class="faq-answer">
+                    Dotčené orgány (hygienici, hasiči, ochrana přírody, památkáři aj.) od 1. 7. 2026 vydávají vyjádření místo závazných stanovisek. Ruší se jednotné environmentální stanovisko (JES). Dotčené orgány se stávají součástí integrovaného řízení.
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFaq(this)">
+                    <span><span class="faq-category-tag up">Územní plán.</span> Kdo je nyní metodickým garantem pro ÚP?</span>
+                    <span class="arrow">&#9660;</span>
+                </div>
+                <div class="faq-answer">
+                    Od 1. 7. 2026 přechází metodická podpora pro územní plánování z MMR na ÚRÚ. Metodickým garantem pro územní plánování je Oddělení územního plánování ÚRÚ. Kontakty na jednotlivé metodiky najdete v sekci Kontakty na metodiky.
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFaq(this)">
+                    <span><span class="faq-category-tag sr">Stavební řád</span> Spadá FVE nad 1 MW pod kompetenci ÚRÚ?</span>
+                    <span class="arrow">&#9660;</span>
+                </div>
+                <div class="faq-answer">
+                    Ano, fotovoltaické elektrárny s instalovaným výkonem nad 1 MW spadají do kategorie vyhrazených staveb a řízení vede ÚRÚ. Bateriová úložiště nad stanovenou kapacitu rovněž. Podrobnosti viz Výklad k § 172 odst. 3 stavebního zákona.
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFaq(this)">
+                    <span><span class="faq-category-tag prechod">Přechod</span> Kde najdu nové vzory dokumentů?</span>
+                    <span class="arrow">&#9660;</span>
+                </div>
+                <div class="faq-answer">
+                    Vzory dokumentů pro nová řízení jsou ke stažení v sekci Metodická stanoviska pod filtrem „Vzorový dokument". Každý vzor je doplněn o komentář a video výklad s vysvětlením správného vyplnění.
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- MULTIMEDIA SECTION -->
+<section class="multimedia-section" id="multimedia">
+    <div class="container">
+        <div class="section-intro">
+            <h2>Video výklady a podcasty</h2>
+            <p>Srozumitelné vysvětlení klíčových témat ve formě video výkladů a audio podcastů generovaných z metodických dokumentů</p>
+        </div>
+
+        <div class="media-grid">
+            <div class="media-card">
+                <div class="media-thumbnail">
+                    <div class="play-btn">&#9654;</div>
+                    <span class="media-badge">Video</span>
+                    <span class="media-duration">12:34</span>
+                </div>
+                <div class="media-body">
+                    <h4>Integrace dotčených orgánů – co se mění v praxi</h4>
+                    <p>Srozumitelný výklad hlavních změn pro stavební úřady i dotčené orgány po 1. 7. 2026.</p>
+                </div>
+            </div>
+
+            <div class="media-card">
+                <div class="media-thumbnail podcast">
+                    <div class="play-btn">&#9654;</div>
+                    <span class="media-badge">Podcast</span>
+                    <span class="media-duration">22:15</span>
+                </div>
+                <div class="media-body">
+                    <h4>Přechodové období – rozhovor s ředitelem úřadu</h4>
+                    <p>Diskuze nad nejčastějšími otázkami k přechodnému období. Generováno pomocí NotebookLM.</p>
+                </div>
+            </div>
+
+            <div class="media-card">
+                <div class="media-thumbnail" style="background: var(--cz-red);">
+                    <div class="play-btn">&#9654;</div>
+                    <span class="media-badge">Video</span>
+                    <span class="media-duration">8:45</span>
+                </div>
+                <div class="media-body">
+                    <h4>Územní plánování po novele – průvodce pro obce</h4>
+                    <p>Kompaktní video výklad zaměřený na obce jako pořizovatele územních plánů.</p>
+                </div>
+            </div>
+
+            <div class="media-card">
+                <div class="media-thumbnail">
+                    <div class="play-btn">&#9654;</div>
+                    <span class="media-badge">Video</span>
+                    <span class="media-duration">15:20</span>
+                </div>
+                <div class="media-body">
+                    <h4>Věcná příslušnost – hraniční případy OZE a bytové domy</h4>
+                    <p>Praktické příklady posuzování věcné příslušnosti u nových typů vyhrazených staveb.</p>
+                </div>
+            </div>
+
+            <div class="media-card">
+                <div class="media-thumbnail podcast">
+                    <div class="play-btn">&#9654;</div>
+                    <span class="media-badge">Podcast</span>
+                    <span class="media-duration">28:30</span>
+                </div>
+                <div class="media-body">
+                    <h4>Nový stavební zákon v otázkách a odpovědích</h4>
+                    <p>Audio formát FAQ – odpovědi na 15 nejčastějších otázků ke stavebnímu řádu.</p>
+                </div>
+            </div>
+
+            <div class="media-card">
+                <div class="media-thumbnail">
+                    <div class="play-btn">&#9654;</div>
+                    <span class="media-badge">Video</span>
+                    <span class="media-duration">10:12</span>
+                </div>
+                <div class="media-body">
+                    <h4>Jak vyplnit nové formuláře – krok za krokem</h4>
+                    <p>Screencast s komentářem pro správné vyplnění vzorových dokumentů nového řízení.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- CONTACTS -->
+<section class="contacts-section" id="contacts">
+    <div class="container">
+        <div class="section-intro">
+            <h2>Kontakty na metodiky</h2>
+            <p>Obraťte se přímo na odborníka ve vaší oblasti</p>
+        </div>
+
+        <div class="contacts-grid">
+            <div class="contact-card">
+                <div class="contact-avatar">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2M12 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8z"/></svg>
+                </div>
+                <h4>Ing. Jana Nováková</h4>
+                <div class="role">Vedoucí oddělení metodiky SR</div>
+                <div class="area">Stavební řád – obecné postupy</div>
+                <a href="#" class="contact-link">Kontaktovat</a>
+            </div>
+            <div class="contact-card">
+                <div class="contact-avatar">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2M12 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8z"/></svg>
+                </div>
+                <h4>Mgr. Petr Dvořák</h4>
+                <div class="role">Metodik</div>
+                <div class="area">Dotčené orgány, integrace DO</div>
+                <a href="#" class="contact-link">Kontaktovat</a>
+            </div>
+            <div class="contact-card">
+                <div class="contact-avatar">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2M12 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8z"/></svg>
+                </div>
+                <h4>Ing. arch. Marie Svobodová</h4>
+                <div class="role">Vedoucí oddělení ÚP</div>
+                <div class="area">Územní plánování</div>
+                <a href="#" class="contact-link">Kontaktovat</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- SHARED FOOTER (rendered by components.js) -->
+<div id="site-footer"></div>
+
+<!-- SHARED CHATBOT (rendered by components.js) -->
+<div id="site-chatbot"></div>
+
+<!-- Scripts -->
+<script src="js/components.js"></script>
+<script src="js/main.js"></script>
+
+</body>
+</html>

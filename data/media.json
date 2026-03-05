@@ -1,0 +1,83 @@
+{
+  "_comment": "Databáze video výkladů a podcastů – přidávejte skutečná média",
+  "media": [
+    {
+      "id": 1,
+      "title": "Integrace dotčených orgánů – co se mění v praxi",
+      "description": "Srozumitelný výklad hlavních změn pro stavební úřady i dotčené orgány po 1. 7. 2026.",
+      "type": "video",
+      "duration": "12:34",
+      "date": "2026-02-15",
+      "author": "Oddělení metodiky SR",
+      "embedUrl": "",
+      "thumbnailColor": "blue",
+      "relatedDocId": 3,
+      "tags": ["Stavební řád", "Dotčené orgány"]
+    },
+    {
+      "id": 2,
+      "title": "Přechodové období – rozhovor s ředitelem úřadu",
+      "description": "Diskuze nad nejčastějšími otázkami k přechodnému období. Generováno pomocí NotebookLM.",
+      "type": "podcast",
+      "duration": "22:15",
+      "date": "2026-01-28",
+      "author": "ÚRÚ",
+      "embedUrl": "",
+      "thumbnailColor": "blue-dark",
+      "relatedDocId": 2,
+      "tags": ["Přechodné období"]
+    },
+    {
+      "id": 3,
+      "title": "Územní plánování po novele – průvodce pro obce",
+      "description": "Kompaktní video výklad zaměřený na obce jako pořizovatele územních plánů.",
+      "type": "video",
+      "duration": "8:45",
+      "date": "2026-01-15",
+      "author": "Oddělení územního plánování",
+      "embedUrl": "",
+      "thumbnailColor": "red",
+      "relatedDocId": 4,
+      "tags": ["Územní plánování", "Obce"]
+    },
+    {
+      "id": 4,
+      "title": "Věcná příslušnost – hraniční případy OZE a bytové domy",
+      "description": "Praktické příklady posuzování věcné příslušnosti u nových typů vyhrazených staveb.",
+      "type": "video",
+      "duration": "15:20",
+      "date": "2026-02-01",
+      "author": "Oddělení metodiky SR",
+      "embedUrl": "",
+      "thumbnailColor": "blue",
+      "relatedDocId": 1,
+      "tags": ["Stavební řád", "OZE", "Věcná příslušnost"]
+    },
+    {
+      "id": 5,
+      "title": "Nový stavební zákon v otázkách a odpovědích",
+      "description": "Audio formát FAQ – odpovědi na 15 nejčastějších otázků ke stavebnímu řádu.",
+      "type": "podcast",
+      "duration": "28:30",
+      "date": "2026-01-20",
+      "author": "ÚRÚ",
+      "embedUrl": "",
+      "thumbnailColor": "blue-dark",
+      "relatedDocId": null,
+      "tags": ["Stavební řád", "FAQ"]
+    },
+    {
+      "id": 6,
+      "title": "Jak vyplnit nové formuláře – krok za krokem",
+      "description": "Screencast s komentářem pro správné vyplnění vzorových dokumentů nového řízení.",
+      "type": "video",
+      "duration": "10:12",
+      "date": "2026-02-10",
+      "author": "Oddělení metodiky SR",
+      "embedUrl": "",
+      "thumbnailColor": "blue",
+      "relatedDocId": null,
+      "tags": ["Formuláře", "Vzory"]
+    }
+  ]
+}

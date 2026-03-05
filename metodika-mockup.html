@@ -123,21 +123,21 @@
             text-decoration: none;
             color: var(--gray-900);
         }
-        /* JVS logo: modrý pruh + červený štít se lvem */
+        /* JVS logo: modrý pruh + červený štít se lvem — dle oficiálního vizuálu */
         .logo-mark {
             display: flex;
             align-items: stretch;
-            height: 48px;
+            height: 52px;
             gap: 0;
+            flex-shrink: 0;
         }
         .logo-stripe {
-            width: 6px;
+            width: 7px;
             background: var(--cz-blue);
-            border-radius: 1px;
         }
         .logo-shield {
-            width: 36px;
-            height: 48px;
+            width: 40px;
+            height: 52px;
             background: var(--cz-red);
             display: flex;
             align-items: center;
@@ -146,9 +146,8 @@
             position: relative;
         }
         .logo-shield svg {
-            width: 22px;
-            height: 28px;
-            fill: white;
+            width: 26px;
+            height: 36px;
         }
         .logo-text {
             display: flex;
@@ -1048,6 +1047,9 @@
             height: 32px;
             background: var(--cz-red);
             margin-left: 1px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
         .footer-logo span {
             color: white;
@@ -1110,9 +1112,37 @@
                 <div class="logo-mark">
                     <div class="logo-stripe"></div>
                     <div class="logo-shield">
-                        <!-- Stylizovaný lev – zjednodušená ikona -->
-                        <svg viewBox="0 0 24 32" fill="white">
-                            <path d="M12 2C8 2 4 6 4 10c0 3 2 5 3 7l1 2c0 1-1 2-1 3 0 2 1 4 2 5l3 3 3-3c1-1 2-3 2-5 0-1-1-2-1-3l1-2c1-2 3-4 3-7 0-4-4-8-8-8zm-2 8c-1 0-2-1-2-2s1-2 2-2 2 1 2 2-1 2-2 2zm4 0c-1 0-2-1-2-2s1-2 2-2 2 1 2 2-1 2-2 2z"/>
+                        <!-- Český dvouocasý lev — heraldický symbol JVS ČR -->
+                        <svg viewBox="0 0 100 140" fill="white" xmlns="http://www.w3.org/2000/svg">
+                            <!-- Koruna -->
+                            <path d="M35 18 L40 6 L45 14 L50 2 L55 14 L60 6 L65 18 Z" fill="white"/>
+                            <rect x="37" y="18" width="26" height="5" rx="1" fill="white"/>
+                            <!-- Hlava -->
+                            <ellipse cx="50" cy="32" rx="13" ry="10" fill="white"/>
+                            <!-- Oči -->
+                            <circle cx="45" cy="30" r="2" fill="#d80c13"/>
+                            <circle cx="55" cy="30" r="2" fill="#d80c13"/>
+                            <!-- Tlama -->
+                            <path d="M46 36 Q50 40 54 36" stroke="#d80c13" stroke-width="1.5" fill="none"/>
+                            <!-- Jazyk -->
+                            <path d="M50 37 L50 42 Q48 44 50 45 Q52 44 50 42" fill="#d80c13" stroke="none"/>
+                            <!-- Tělo -->
+                            <path d="M40 40 Q35 50 30 60 Q28 70 35 75 Q40 78 42 82 L44 90 Q46 95 50 92 Q48 88 50 85 Q52 88 50 92 Q54 95 56 90 L58 82 Q60 78 65 75 Q72 70 70 60 Q65 50 60 40" fill="white"/>
+                            <!-- Přední tlapy -->
+                            <path d="M30 60 Q22 55 18 50 Q16 48 14 50 Q12 54 18 58 Q22 62 28 65" fill="white"/>
+                            <path d="M70 60 Q78 55 82 50 Q84 48 86 50 Q88 54 82 58 Q78 62 72 65" fill="white"/>
+                            <!-- Drápy přední -->
+                            <path d="M14 50 L10 47 M14 50 L11 49 M14 50 L12 52" stroke="white" stroke-width="1.5"/>
+                            <path d="M86 50 L90 47 M86 50 L89 49 M86 50 L88 52" stroke="white" stroke-width="1.5"/>
+                            <!-- Dva ocasy (dvouocasý lev) -->
+                            <path d="M42 90 Q35 100 28 105 Q22 108 18 115 Q16 120 20 122 Q24 120 26 116 Q30 110 36 105 Q40 100 44 95" fill="white" stroke="white" stroke-width="1"/>
+                            <path d="M58 90 Q65 100 72 105 Q78 108 82 115 Q84 120 80 122 Q76 120 74 116 Q70 110 64 105 Q60 100 56 95" fill="white" stroke="white" stroke-width="1"/>
+                            <!-- Zakončení ocasů -->
+                            <path d="M18 115 Q14 118 12 122 Q10 126 14 128 Q18 126 20 122" fill="white"/>
+                            <path d="M82 115 Q86 118 88 122 Q90 126 86 128 Q82 126 80 122" fill="white"/>
+                            <!-- Zadní tlapy -->
+                            <path d="M38 82 Q32 86 28 90 Q26 94 30 96 Q34 94 36 90 Q38 86 40 84" fill="white"/>
+                            <path d="M62 82 Q68 86 72 90 Q74 94 70 96 Q66 94 64 90 Q62 86 60 84" fill="white"/>
                         </svg>
                     </div>
                 </div>
@@ -1621,7 +1651,18 @@
             <div class="footer-col">
                 <div class="footer-logo">
                     <div class="f-stripe"></div>
-                    <div class="f-shield"></div>
+                    <div class="f-shield">
+                        <svg viewBox="0 0 100 140" fill="white" xmlns="http://www.w3.org/2000/svg" style="width:16px;height:22px;">
+                            <path d="M35 18 L40 6 L45 14 L50 2 L55 14 L60 6 L65 18 Z"/>
+                            <rect x="37" y="18" width="26" height="5" rx="1"/>
+                            <ellipse cx="50" cy="32" rx="13" ry="10"/>
+                            <path d="M40 40 Q35 50 30 60 Q28 70 35 75 Q40 78 42 82 L44 90 Q46 95 50 92 Q48 88 50 85 Q52 88 50 92 Q54 95 56 90 L58 82 Q60 78 65 75 Q72 70 70 60 Q65 50 60 40"/>
+                            <path d="M30 60 Q22 55 18 50 Q16 48 14 50 Q12 54 18 58 Q22 62 28 65"/>
+                            <path d="M70 60 Q78 55 82 50 Q84 48 86 50 Q88 54 82 58 Q78 62 72 65"/>
+                            <path d="M42 90 Q35 100 28 105 Q22 108 18 115 Q16 120 20 122 Q24 120 26 116 Q30 110 36 105 Q40 100 44 95"/>
+                            <path d="M58 90 Q65 100 72 105 Q78 108 82 115 Q84 120 80 122 Q76 120 74 116 Q70 110 64 105 Q60 100 56 95"/>
+                        </svg>
+                    </div>
                     <span>Úřad rozvoje území</span>
                 </div>
                 <p>Zelený pruh 1294/52<br>147 00 Praha 4</p>

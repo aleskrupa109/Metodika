@@ -4,58 +4,106 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ÚRÚ – Metodická podpora</title>
+    <!-- Czechia Sans™ není veřejně dostupný webfont – v produkci nahradit za Czechia Sans.
+         Pro mockup používáme Inter jako nejbližší aproximaci geometrického monolineárního fontu. -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
+        /* ============================================================
+           JVS České republiky – barevný systém
+           Červená:  #d80c13  (Pantone 485 C)
+           Modrá:   #08437f  (Pantone Reflex Blue C)
+           Bílá:    #ffffff
+           ============================================================ */
         :root {
-            --primary: #1a3a5c;
-            --primary-light: #2a5a8c;
-            --accent: #c8102e;
-            --accent-light: #e8304e;
-            --bg: #f5f7fa;
+            --cz-red: #d80c13;
+            --cz-red-dark: #b00a10;
+            --cz-red-light: #fce8e9;
+            --cz-blue: #08437f;
+            --cz-blue-dark: #062f5a;
+            --cz-blue-light: #e6eef6;
+            --cz-blue-pale: #f0f5fb;
             --white: #ffffff;
-            --gray-100: #f0f2f5;
-            --gray-200: #e1e5eb;
-            --gray-300: #c4cbd6;
-            --gray-500: #6b7a8d;
-            --gray-700: #3d4f63;
-            --gray-900: #1a2332;
-            --success: #28a745;
-            --warning: #ffc107;
-            --info: #17a2b8;
-            --radius: 8px;
-            --radius-lg: 12px;
-            --shadow: 0 2px 8px rgba(0,0,0,0.08);
-            --shadow-lg: 0 4px 20px rgba(0,0,0,0.12);
-            --transition: 0.2s ease;
+            --gray-50: #fafbfc;
+            --gray-100: #f2f4f7;
+            --gray-200: #e4e7ec;
+            --gray-300: #cdd3dc;
+            --gray-400: #98a2b3;
+            --gray-500: #667085;
+            --gray-600: #475467;
+            --gray-700: #344054;
+            --gray-800: #1d2939;
+            --gray-900: #101828;
+            --success: #12b76a;
+            --warning: #f79009;
+            --shadow-sm: 0 1px 3px rgba(16,24,40,0.06);
+            --shadow: 0 2px 6px rgba(16,24,40,0.08);
+            --shadow-md: 0 4px 12px rgba(16,24,40,0.10);
+            --shadow-lg: 0 8px 24px rgba(16,24,40,0.12);
+            --transition: 0.15s ease;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body {
-            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
-            background: var(--bg);
+            font-family: 'Inter', system-ui, -apple-system, sans-serif;
+            background: var(--gray-50);
             color: var(--gray-900);
             line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 32px; }
+
+        /* ===== UTILITY: Modrý vertikální pruh — klíčový prvek JVS ===== */
+        .jvs-stripe {
+            position: relative;
+        }
+        .jvs-stripe::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 4px;
+            background: var(--cz-blue);
         }
 
         /* ===== TOP BAR ===== */
         .top-bar {
-            background: var(--primary);
-            color: white;
-            font-size: 0.8rem;
-            padding: 6px 0;
+            background: var(--gray-900);
+            color: rgba(255,255,255,0.7);
+            font-size: 0.78rem;
+            padding: 7px 0;
+            letter-spacing: 0.02em;
         }
         .top-bar .container {
             display: flex;
-            justify-content: flex-end;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .top-bar-left {
+            display: flex;
             gap: 20px;
         }
-        .top-bar a { color: rgba(255,255,255,0.8); text-decoration: none; }
+        .top-bar a {
+            color: rgba(255,255,255,0.7);
+            text-decoration: none;
+            transition: var(--transition);
+        }
         .top-bar a:hover { color: white; }
+        .top-bar .gov-label {
+            font-weight: 500;
+            color: rgba(255,255,255,0.9);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
 
         /* ===== HEADER ===== */
         header {
             background: var(--white);
-            border-bottom: 3px solid var(--accent);
             position: sticky;
             top: 0;
             z-index: 100;
@@ -65,147 +113,216 @@
             display: flex;
             align-items: center;
             justify-content: space-between;
-            padding: 16px 0;
+            padding: 0;
+            height: 72px;
         }
         .logo {
             display: flex;
             align-items: center;
-            gap: 14px;
+            gap: 16px;
             text-decoration: none;
-            color: var(--primary);
+            color: var(--gray-900);
         }
-        .logo-icon {
-            width: 48px;
+        /* JVS logo: modrý pruh + červený štít se lvem */
+        .logo-mark {
+            display: flex;
+            align-items: stretch;
             height: 48px;
-            background: var(--primary);
-            border-radius: 8px;
+            gap: 0;
+        }
+        .logo-stripe {
+            width: 6px;
+            background: var(--cz-blue);
+            border-radius: 1px;
+        }
+        .logo-shield {
+            width: 36px;
+            height: 48px;
+            background: var(--cz-red);
             display: flex;
             align-items: center;
             justify-content: center;
-            color: white;
-            font-weight: 700;
-            font-size: 1.1rem;
+            margin-left: 2px;
+            position: relative;
         }
-        .logo-text { font-size: 1.1rem; }
-        .logo-text strong { display: block; font-size: 1.2rem; }
-        .logo-text span { font-size: 0.8rem; color: var(--gray-500); }
+        .logo-shield svg {
+            width: 22px;
+            height: 28px;
+            fill: white;
+        }
+        .logo-text {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        .logo-text .institution {
+            font-size: 1.05rem;
+            font-weight: 700;
+            color: var(--cz-blue);
+            line-height: 1.2;
+            letter-spacing: -0.01em;
+        }
+        .logo-text .country {
+            font-size: 0.78rem;
+            font-weight: 400;
+            color: var(--gray-500);
+            letter-spacing: 0.04em;
+            text-transform: uppercase;
+        }
 
+        nav { display: flex; align-items: center; }
         nav ul {
             display: flex;
             list-style: none;
-            gap: 4px;
+            gap: 0;
         }
         nav a {
-            display: block;
-            padding: 10px 16px;
+            display: flex;
+            align-items: center;
+            height: 72px;
+            padding: 0 18px;
             text-decoration: none;
-            color: var(--gray-700);
-            border-radius: var(--radius);
-            font-size: 0.95rem;
+            color: var(--gray-600);
+            font-size: 0.9rem;
             font-weight: 500;
             transition: var(--transition);
+            border-bottom: 3px solid transparent;
+            letter-spacing: 0.01em;
         }
-        nav a:hover { background: var(--gray-100); color: var(--primary); }
+        nav a:hover {
+            color: var(--cz-blue);
+            border-bottom-color: var(--cz-blue);
+            background: var(--cz-blue-pale);
+        }
         nav a.active {
-            background: var(--primary);
-            color: white;
+            color: var(--cz-blue);
+            border-bottom-color: var(--cz-red);
+            font-weight: 600;
         }
 
-        .container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+        /* ===== BREADCRUMB ===== */
+        .breadcrumb {
+            padding: 14px 0;
+            font-size: 0.82rem;
+            color: var(--gray-400);
+        }
+        .breadcrumb a { color: var(--gray-400); text-decoration: none; }
+        .breadcrumb a:hover { color: var(--cz-blue); }
+        .breadcrumb strong { color: var(--gray-600); }
 
         /* ===== HERO ===== */
         .hero {
-            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+            background: var(--cz-blue);
             color: white;
-            padding: 48px 0 56px;
+            padding: 52px 0 60px;
             position: relative;
             overflow: hidden;
+        }
+        /* Dekorativní motiv: velký modrý pruh v pozadí */
+        .hero::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 8px;
+            background: var(--cz-red);
         }
         .hero::after {
             content: '';
             position: absolute;
-            right: -100px;
-            top: -100px;
-            width: 400px;
-            height: 400px;
-            background: rgba(255,255,255,0.04);
-            border-radius: 50%;
+            right: -40px;
+            bottom: -60px;
+            width: 320px;
+            height: 320px;
+            border: 40px solid rgba(255,255,255,0.03);
+            border-radius: 0;
+            transform: rotate(15deg);
         }
         .hero h1 {
-            font-size: 2.2rem;
-            margin-bottom: 12px;
-            font-weight: 700;
+            font-size: 2.4rem;
+            margin-bottom: 14px;
+            font-weight: 800;
+            letter-spacing: -0.02em;
+            line-height: 1.15;
         }
         .hero p {
-            font-size: 1.15rem;
-            opacity: 0.9;
-            max-width: 680px;
-            margin-bottom: 28px;
+            font-size: 1.1rem;
+            opacity: 0.85;
+            max-width: 640px;
+            margin-bottom: 32px;
+            font-weight: 300;
+            line-height: 1.7;
         }
 
         /* ===== SEARCH BAR ===== */
         .search-bar {
             background: var(--white);
-            border-radius: var(--radius-lg);
-            padding: 6px;
+            padding: 5px;
             display: flex;
+            max-width: 680px;
             box-shadow: var(--shadow-lg);
-            max-width: 700px;
         }
         .search-bar input {
             flex: 1;
             border: none;
             padding: 14px 20px;
-            font-size: 1rem;
+            font-size: 0.95rem;
+            font-family: inherit;
             outline: none;
-            border-radius: var(--radius);
             background: transparent;
+            color: var(--gray-900);
         }
+        .search-bar input::placeholder { color: var(--gray-400); }
         .search-bar button {
-            background: var(--accent);
+            background: var(--cz-red);
             color: white;
             border: none;
-            padding: 14px 28px;
-            border-radius: var(--radius);
-            font-size: 1rem;
+            padding: 14px 32px;
+            font-size: 0.9rem;
             font-weight: 600;
+            font-family: inherit;
             cursor: pointer;
             transition: var(--transition);
+            letter-spacing: 0.02em;
         }
-        .search-bar button:hover { background: var(--accent-light); }
+        .search-bar button:hover { background: var(--cz-red-dark); }
 
         .hero-tags {
-            margin-top: 16px;
+            margin-top: 20px;
             display: flex;
             gap: 8px;
             flex-wrap: wrap;
         }
         .hero-tag {
-            background: rgba(255,255,255,0.15);
+            background: rgba(255,255,255,0.12);
             color: white;
-            padding: 6px 14px;
-            border-radius: 20px;
-            font-size: 0.85rem;
+            padding: 6px 16px;
+            font-size: 0.82rem;
             cursor: pointer;
             transition: var(--transition);
-            border: 1px solid rgba(255,255,255,0.2);
+            border: 1px solid rgba(255,255,255,0.18);
+            font-weight: 500;
+            letter-spacing: 0.01em;
         }
-        .hero-tag:hover { background: rgba(255,255,255,0.25); }
+        .hero-tag:hover {
+            background: rgba(255,255,255,0.22);
+            border-color: rgba(255,255,255,0.3);
+        }
 
-        /* ===== AUDIENCE TABS ===== */
-        .audience-section { padding: 40px 0; }
-        .section-intro {
-            text-align: center;
-            margin-bottom: 32px;
-        }
+        /* ===== AUDIENCE SECTION ===== */
+        .audience-section { padding: 48px 0; }
+        .section-intro { margin-bottom: 28px; }
         .section-intro h2 {
-            font-size: 1.6rem;
-            color: var(--primary);
-            margin-bottom: 8px;
+            font-size: 1.5rem;
+            color: var(--cz-blue);
+            margin-bottom: 6px;
+            font-weight: 700;
+            letter-spacing: -0.01em;
         }
         .section-intro p {
             color: var(--gray-500);
-            font-size: 1.05rem;
+            font-size: 0.95rem;
         }
 
         .audience-cards {
@@ -216,302 +333,407 @@
         }
         .audience-card {
             background: var(--white);
-            border-radius: var(--radius-lg);
             padding: 28px 24px;
             cursor: pointer;
             transition: var(--transition);
-            border: 2px solid transparent;
-            box-shadow: var(--shadow);
+            border: 1px solid var(--gray-200);
+            border-left: 4px solid var(--gray-200);
+            box-shadow: var(--shadow-sm);
         }
         .audience-card:hover {
-            border-color: var(--primary);
-            transform: translateY(-2px);
-            box-shadow: var(--shadow-lg);
+            border-left-color: var(--cz-blue);
+            box-shadow: var(--shadow-md);
+            transform: translateY(-1px);
         }
         .audience-card.active {
-            border-color: var(--primary);
-            background: linear-gradient(to bottom, rgba(26,58,92,0.04), var(--white));
+            border-left-color: var(--cz-red);
+            background: var(--cz-blue-pale);
+            border-color: var(--cz-blue-light);
+            border-left-color: var(--cz-red);
         }
-        .audience-card .icon {
-            width: 48px;
-            height: 48px;
-            border-radius: 10px;
+        .audience-card .card-icon {
+            width: 44px;
+            height: 44px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1.5rem;
             margin-bottom: 14px;
+            background: var(--cz-blue-light);
+            color: var(--cz-blue);
         }
-        .audience-card:nth-child(1) .icon { background: #e8f4fd; }
-        .audience-card:nth-child(2) .icon { background: #fef3e2; }
-        .audience-card:nth-child(3) .icon { background: #e8f5e9; }
-        .audience-card h3 { font-size: 1.1rem; margin-bottom: 6px; color: var(--primary); }
-        .audience-card p { font-size: 0.9rem; color: var(--gray-500); }
+        .audience-card.active .card-icon {
+            background: var(--cz-blue);
+            color: white;
+        }
+        .audience-card h3 {
+            font-size: 1.05rem;
+            margin-bottom: 6px;
+            color: var(--cz-blue);
+            font-weight: 700;
+        }
+        .audience-card p { font-size: 0.87rem; color: var(--gray-500); line-height: 1.5; }
 
         /* ===== CONTENT GRID ===== */
-        .content-section { padding: 0 0 50px; }
-
+        .content-section { padding: 0 0 56px; }
         .content-grid {
             display: grid;
-            grid-template-columns: 280px 1fr;
+            grid-template-columns: 260px 1fr;
             gap: 28px;
         }
 
-        /* SIDEBAR FILTERS */
+        /* SIDEBAR */
         .sidebar {
             background: var(--white);
-            border-radius: var(--radius-lg);
+            border: 1px solid var(--gray-200);
             padding: 24px;
-            box-shadow: var(--shadow);
             position: sticky;
-            top: 100px;
+            top: 90px;
             height: fit-content;
         }
         .sidebar h3 {
-            font-size: 1rem;
-            color: var(--primary);
-            margin-bottom: 16px;
-            padding-bottom: 10px;
-            border-bottom: 2px solid var(--gray-200);
+            font-size: 0.85rem;
+            color: var(--cz-blue);
+            margin-bottom: 18px;
+            padding-bottom: 12px;
+            border-bottom: 2px solid var(--cz-blue);
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+            font-weight: 700;
         }
         .filter-group { margin-bottom: 20px; }
         .filter-group label {
             display: block;
-            font-size: 0.85rem;
+            font-size: 0.8rem;
             font-weight: 600;
             color: var(--gray-700);
-            margin-bottom: 8px;
+            margin-bottom: 6px;
+            letter-spacing: 0.02em;
         }
         .filter-group select {
             width: 100%;
-            padding: 10px 12px;
+            padding: 9px 12px;
             border: 1px solid var(--gray-200);
-            border-radius: var(--radius);
-            font-size: 0.9rem;
+            font-size: 0.85rem;
+            font-family: inherit;
             background: var(--white);
             color: var(--gray-700);
             cursor: pointer;
+            transition: var(--transition);
         }
-        .filter-tags {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 6px;
+        .filter-group select:focus {
+            border-color: var(--cz-blue);
+            outline: 2px solid var(--cz-blue-light);
         }
+        .filter-tags { display: flex; flex-wrap: wrap; gap: 6px; }
         .filter-tag {
-            padding: 6px 12px;
+            padding: 5px 12px;
             border: 1px solid var(--gray-200);
-            border-radius: 20px;
             font-size: 0.8rem;
             cursor: pointer;
             transition: var(--transition);
-            color: var(--gray-700);
+            color: var(--gray-600);
             background: var(--white);
+            font-weight: 500;
         }
-        .filter-tag:hover, .filter-tag.active {
-            background: var(--primary);
+        .filter-tag:hover { border-color: var(--cz-blue); color: var(--cz-blue); }
+        .filter-tag.active {
+            background: var(--cz-blue);
             color: white;
-            border-color: var(--primary);
+            border-color: var(--cz-blue);
         }
         .filter-reset {
             display: block;
             text-align: center;
             padding: 10px;
-            color: var(--accent);
-            font-size: 0.85rem;
+            color: var(--cz-red);
+            font-size: 0.82rem;
             cursor: pointer;
             border: none;
             background: none;
             width: 100%;
-            margin-top: 10px;
+            margin-top: 12px;
+            font-family: inherit;
+            font-weight: 500;
         }
+        .filter-reset:hover { text-decoration: underline; }
 
-        /* MAIN CONTENT */
-        .main-content {}
-
-        /* Tab navigation for content types */
+        /* CONTENT TABS */
         .content-tabs {
             display: flex;
-            gap: 4px;
+            gap: 0;
             margin-bottom: 24px;
-            background: var(--white);
-            border-radius: var(--radius-lg);
-            padding: 6px;
-            box-shadow: var(--shadow);
+            border-bottom: 2px solid var(--gray-200);
         }
         .content-tab {
-            padding: 12px 20px;
-            border-radius: var(--radius);
+            padding: 14px 22px;
             cursor: pointer;
-            font-size: 0.9rem;
+            font-size: 0.88rem;
             font-weight: 500;
             color: var(--gray-500);
             transition: var(--transition);
             border: none;
             background: none;
+            font-family: inherit;
             display: flex;
             align-items: center;
             gap: 8px;
+            border-bottom: 3px solid transparent;
+            margin-bottom: -2px;
+            letter-spacing: 0.01em;
         }
-        .content-tab:hover { background: var(--gray-100); color: var(--gray-700); }
-        .content-tab.active { background: var(--primary); color: white; }
+        .content-tab:hover { color: var(--cz-blue); }
+        .content-tab.active {
+            color: var(--cz-blue);
+            border-bottom-color: var(--cz-red);
+            font-weight: 600;
+        }
         .content-tab .badge {
-            background: rgba(255,255,255,0.2);
+            background: var(--gray-100);
             padding: 2px 8px;
-            border-radius: 10px;
-            font-size: 0.75rem;
+            font-size: 0.72rem;
+            font-weight: 600;
+            color: var(--gray-500);
         }
-        .content-tab.active .badge { background: rgba(255,255,255,0.25); }
+        .content-tab.active .badge {
+            background: var(--cz-blue-light);
+            color: var(--cz-blue);
+        }
 
-        /* Document cards */
-        .doc-list { display: flex; flex-direction: column; gap: 16px; }
+        /* RESULTS BAR */
+        .results-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            font-size: 0.85rem;
+            color: var(--gray-500);
+        }
+        .results-bar select {
+            padding: 7px 12px;
+            border: 1px solid var(--gray-200);
+            font-size: 0.82rem;
+            font-family: inherit;
+        }
 
+        /* TRANSITION BANNER */
+        .transition-banner {
+            background: var(--cz-red-light);
+            border-left: 4px solid var(--cz-red);
+            padding: 24px 28px;
+            margin-bottom: 28px;
+            display: flex;
+            gap: 18px;
+            align-items: flex-start;
+        }
+        .transition-banner .banner-icon {
+            width: 40px;
+            height: 40px;
+            background: var(--cz-red);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            flex-shrink: 0;
+        }
+        .transition-banner h3 {
+            font-size: 1rem;
+            color: var(--cz-red-dark);
+            margin-bottom: 4px;
+            font-weight: 700;
+        }
+        .transition-banner p {
+            font-size: 0.87rem;
+            color: var(--gray-700);
+            margin-bottom: 10px;
+        }
+        .transition-banner a {
+            color: var(--cz-red);
+            font-weight: 600;
+            text-decoration: none;
+            font-size: 0.87rem;
+        }
+        .transition-banner a:hover { text-decoration: underline; }
+
+        /* DOCUMENT CARDS */
+        .doc-list { display: flex; flex-direction: column; gap: 1px; background: var(--gray-200); }
         .doc-card {
             background: var(--white);
-            border-radius: var(--radius-lg);
-            padding: 24px;
-            box-shadow: var(--shadow);
+            padding: 22px 24px;
             transition: var(--transition);
             border-left: 4px solid transparent;
         }
         .doc-card:hover {
-            box-shadow: var(--shadow-lg);
-            border-left-color: var(--primary);
+            background: var(--cz-blue-pale);
+            border-left-color: var(--cz-blue);
         }
         .doc-card-header {
             display: flex;
             justify-content: space-between;
             align-items: flex-start;
-            margin-bottom: 10px;
+            margin-bottom: 8px;
         }
         .doc-card h4 {
-            font-size: 1.05rem;
-            color: var(--primary);
+            font-size: 1rem;
+            color: var(--cz-blue);
             margin-bottom: 4px;
+            font-weight: 600;
         }
-        .doc-card h4 a {
-            color: inherit;
-            text-decoration: none;
-        }
+        .doc-card h4 a { color: inherit; text-decoration: none; }
         .doc-card h4 a:hover { text-decoration: underline; }
         .doc-meta {
             display: flex;
             gap: 16px;
-            font-size: 0.8rem;
-            color: var(--gray-500);
-            margin-bottom: 10px;
+            font-size: 0.78rem;
+            color: var(--gray-400);
+            margin-bottom: 8px;
         }
         .doc-meta span { display: flex; align-items: center; gap: 4px; }
         .doc-excerpt {
-            font-size: 0.9rem;
-            color: var(--gray-700);
-            margin-bottom: 14px;
-            line-height: 1.5;
+            font-size: 0.87rem;
+            color: var(--gray-600);
+            margin-bottom: 12px;
+            line-height: 1.6;
         }
         .doc-tags { display: flex; gap: 6px; flex-wrap: wrap; }
         .doc-tag {
-            padding: 4px 10px;
-            background: var(--gray-100);
-            border-radius: 4px;
-            font-size: 0.75rem;
-            color: var(--gray-500);
+            padding: 3px 10px;
+            background: var(--cz-blue-light);
+            font-size: 0.72rem;
+            color: var(--cz-blue);
+            font-weight: 500;
+            letter-spacing: 0.02em;
         }
         .doc-status {
             padding: 4px 12px;
-            border-radius: 4px;
-            font-size: 0.75rem;
+            font-size: 0.72rem;
             font-weight: 600;
             white-space: nowrap;
+            letter-spacing: 0.02em;
         }
-        .doc-status.platne { background: #e8f5e9; color: #2e7d32; }
-        .doc-status.nahrazene { background: #fff3e0; color: #e65100; }
+        .doc-status.platne { background: #ecfdf3; color: #027a48; }
+        .doc-status.nahrazene { background: #fffaeb; color: #b54708; }
         .doc-format {
             display: flex;
             gap: 8px;
-            margin-top: 14px;
-            padding-top: 14px;
+            margin-top: 12px;
+            padding-top: 12px;
             border-top: 1px solid var(--gray-100);
         }
         .format-btn {
             padding: 6px 14px;
-            border-radius: var(--radius);
-            font-size: 0.8rem;
+            font-size: 0.78rem;
             cursor: pointer;
             transition: var(--transition);
             border: 1px solid var(--gray-200);
             background: var(--white);
-            color: var(--gray-700);
+            color: var(--gray-600);
             display: flex;
             align-items: center;
             gap: 6px;
             text-decoration: none;
+            font-family: inherit;
+            font-weight: 500;
         }
         .format-btn:hover { background: var(--gray-100); }
-        .format-btn.pdf { border-color: #c62828; color: #c62828; }
-        .format-btn.video { border-color: var(--primary); color: var(--primary); }
+        .format-btn.pdf { border-color: var(--cz-red); color: var(--cz-red); }
+        .format-btn.pdf:hover { background: var(--cz-red-light); }
+        .format-btn.video { border-color: var(--cz-blue); color: var(--cz-blue); }
+        .format-btn.video:hover { background: var(--cz-blue-light); }
+
+        /* PAGINATION */
+        .pagination {
+            display: flex;
+            justify-content: center;
+            gap: 2px;
+            margin-top: 28px;
+        }
+        .pagination a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            text-decoration: none;
+            color: var(--gray-600);
+            font-size: 0.88rem;
+            transition: var(--transition);
+            font-weight: 500;
+        }
+        .pagination a:hover { background: var(--cz-blue-light); color: var(--cz-blue); }
+        .pagination a.active { background: var(--cz-blue); color: white; }
 
         /* ===== FAQ SECTION ===== */
         .faq-section {
-            padding: 50px 0;
+            padding: 56px 0;
             background: var(--white);
+            border-top: 1px solid var(--gray-200);
         }
         .faq-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 16px;
+            gap: 12px;
         }
         .faq-item {
             border: 1px solid var(--gray-200);
-            border-radius: var(--radius-lg);
             overflow: hidden;
             transition: var(--transition);
         }
-        .faq-item:hover { border-color: var(--primary-light); }
+        .faq-item:hover { border-color: var(--cz-blue-light); }
         .faq-question {
-            padding: 18px 20px;
+            padding: 16px 20px;
             font-weight: 600;
-            font-size: 0.95rem;
-            color: var(--gray-900);
+            font-size: 0.9rem;
+            color: var(--gray-800);
             cursor: pointer;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            background: var(--gray-100);
+            background: var(--gray-50);
             transition: var(--transition);
+            gap: 12px;
         }
-        .faq-question:hover { background: var(--gray-200); }
+        .faq-question:hover { background: var(--cz-blue-pale); }
         .faq-question .arrow {
-            font-size: 1.2rem;
-            color: var(--gray-500);
+            font-size: 0.8rem;
+            color: var(--gray-400);
             transition: var(--transition);
+            flex-shrink: 0;
         }
         .faq-answer {
             padding: 0 20px;
             max-height: 0;
             overflow: hidden;
             transition: max-height 0.3s ease, padding 0.3s ease;
-            font-size: 0.9rem;
-            color: var(--gray-700);
-            line-height: 1.6;
+            font-size: 0.87rem;
+            color: var(--gray-600);
+            line-height: 1.65;
         }
         .faq-item.open .faq-answer {
             max-height: 300px;
             padding: 16px 20px;
+            border-top: 1px solid var(--gray-100);
         }
+        .faq-item.open .faq-question { background: var(--cz-blue-pale); }
         .faq-item.open .arrow { transform: rotate(180deg); }
         .faq-category-tag {
             display: inline-block;
             padding: 2px 8px;
-            border-radius: 4px;
-            font-size: 0.7rem;
+            font-size: 0.68rem;
             font-weight: 600;
             margin-right: 8px;
+            letter-spacing: 0.03em;
+            text-transform: uppercase;
         }
-        .faq-category-tag.sr { background: #e8f4fd; color: #1565c0; }
-        .faq-category-tag.up { background: #e8f5e9; color: #2e7d32; }
-        .faq-category-tag.prechod { background: #fff3e0; color: #e65100; }
+        .faq-category-tag.sr { background: var(--cz-blue-light); color: var(--cz-blue); }
+        .faq-category-tag.up { background: #ecfdf3; color: #027a48; }
+        .faq-category-tag.prechod { background: var(--cz-red-light); color: var(--cz-red); }
 
         /* ===== MULTIMEDIA SECTION ===== */
-        .multimedia-section { padding: 50px 0; }
+        .multimedia-section {
+            padding: 56px 0;
+            border-top: 1px solid var(--gray-200);
+        }
         .media-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
@@ -519,60 +741,128 @@
         }
         .media-card {
             background: var(--white);
-            border-radius: var(--radius-lg);
             overflow: hidden;
-            box-shadow: var(--shadow);
+            box-shadow: var(--shadow-sm);
+            border: 1px solid var(--gray-200);
             transition: var(--transition);
         }
         .media-card:hover {
-            transform: translateY(-3px);
-            box-shadow: var(--shadow-lg);
+            box-shadow: var(--shadow-md);
+            transform: translateY(-2px);
         }
         .media-thumbnail {
-            height: 180px;
-            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+            height: 170px;
+            background: var(--cz-blue);
             display: flex;
             align-items: center;
             justify-content: center;
             position: relative;
         }
+        .media-thumbnail.podcast { background: var(--cz-blue-dark); }
         .play-btn {
-            width: 60px;
-            height: 60px;
-            background: rgba(255,255,255,0.9);
-            border-radius: 50%;
+            width: 56px;
+            height: 56px;
+            background: rgba(255,255,255,0.92);
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1.5rem;
-            color: var(--primary);
+            font-size: 1.4rem;
+            color: var(--cz-blue);
             cursor: pointer;
+            transition: var(--transition);
         }
+        .play-btn:hover { background: white; transform: scale(1.05); }
         .media-badge {
             position: absolute;
             top: 12px;
             left: 12px;
-            padding: 4px 10px;
-            background: rgba(0,0,0,0.6);
+            padding: 3px 10px;
+            background: var(--cz-red);
             color: white;
-            border-radius: 4px;
-            font-size: 0.75rem;
+            font-size: 0.7rem;
+            font-weight: 600;
+            letter-spacing: 0.04em;
+            text-transform: uppercase;
         }
         .media-duration {
             position: absolute;
             bottom: 12px;
             right: 12px;
-            padding: 4px 8px;
-            background: rgba(0,0,0,0.7);
+            padding: 3px 8px;
+            background: rgba(0,0,0,0.6);
             color: white;
-            border-radius: 4px;
             font-size: 0.75rem;
+            font-weight: 500;
         }
         .media-body { padding: 18px; }
-        .media-body h4 { font-size: 0.95rem; color: var(--primary); margin-bottom: 6px; }
-        .media-body p { font-size: 0.85rem; color: var(--gray-500); }
+        .media-body h4 {
+            font-size: 0.92rem;
+            color: var(--cz-blue);
+            margin-bottom: 6px;
+            font-weight: 600;
+            line-height: 1.3;
+        }
+        .media-body p { font-size: 0.82rem; color: var(--gray-500); line-height: 1.5; }
 
-        /* ===== CHATBOT WIDGET ===== */
+        /* ===== CONTACTS ===== */
+        .contacts-section {
+            padding: 56px 0;
+            background: var(--cz-blue-pale);
+            border-top: 1px solid var(--gray-200);
+        }
+        .contacts-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+        .contact-card {
+            background: var(--white);
+            padding: 24px;
+            border: 1px solid var(--gray-200);
+            border-top: 3px solid var(--cz-blue);
+            transition: var(--transition);
+        }
+        .contact-card:hover {
+            box-shadow: var(--shadow-md);
+            transform: translateY(-2px);
+        }
+        .contact-avatar {
+            width: 56px;
+            height: 56px;
+            background: var(--cz-blue-light);
+            margin-bottom: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.3rem;
+            color: var(--cz-blue);
+        }
+        .contact-card h4 { font-size: 0.95rem; color: var(--gray-900); margin-bottom: 2px; font-weight: 600; }
+        .contact-card .role { font-size: 0.82rem; color: var(--gray-400); margin-bottom: 10px; }
+        .contact-card .area {
+            display: inline-block;
+            padding: 4px 10px;
+            background: var(--cz-blue-light);
+            font-size: 0.75rem;
+            color: var(--cz-blue);
+            margin-bottom: 16px;
+            font-weight: 500;
+        }
+        .contact-link {
+            display: block;
+            padding: 10px 16px;
+            background: var(--cz-blue);
+            color: white;
+            text-decoration: none;
+            font-size: 0.85rem;
+            transition: var(--transition);
+            text-align: center;
+            font-weight: 500;
+            letter-spacing: 0.02em;
+        }
+        .contact-link:hover { background: var(--cz-blue-dark); }
+
+        /* ===== CHATBOT ===== */
         .chatbot-trigger {
             position: fixed;
             bottom: 28px;
@@ -580,34 +870,32 @@
             z-index: 1000;
         }
         .chatbot-btn {
-            width: 64px;
-            height: 64px;
-            border-radius: 50%;
-            background: var(--accent);
+            width: 60px;
+            height: 60px;
+            background: var(--cz-red);
             color: white;
             border: none;
-            font-size: 1.6rem;
+            font-size: 1.5rem;
             cursor: pointer;
-            box-shadow: 0 4px 16px rgba(200,16,46,0.4);
+            box-shadow: 0 4px 16px rgba(216,12,19,0.35);
             transition: var(--transition);
             display: flex;
             align-items: center;
             justify-content: center;
         }
-        .chatbot-btn:hover { transform: scale(1.08); }
+        .chatbot-btn:hover { transform: scale(1.05); background: var(--cz-red-dark); }
         .chatbot-label {
             position: absolute;
-            right: 76px;
+            right: 72px;
             top: 50%;
             transform: translateY(-50%);
             background: var(--white);
             padding: 8px 16px;
-            border-radius: var(--radius);
-            box-shadow: var(--shadow-lg);
-            font-size: 0.85rem;
+            box-shadow: var(--shadow-md);
+            font-size: 0.82rem;
             color: var(--gray-700);
             white-space: nowrap;
-            font-weight: 500;
+            font-weight: 600;
         }
 
         .chatbot-window {
@@ -617,23 +905,23 @@
             width: 400px;
             height: 520px;
             background: var(--white);
-            border-radius: var(--radius-lg);
-            box-shadow: 0 8px 40px rgba(0,0,0,0.2);
+            box-shadow: 0 8px 40px rgba(0,0,0,0.18);
             z-index: 1001;
             display: none;
             flex-direction: column;
             overflow: hidden;
+            border: 1px solid var(--gray-200);
         }
         .chatbot-window.open { display: flex; }
         .chat-header {
-            background: var(--primary);
+            background: var(--cz-blue);
             color: white;
             padding: 16px 20px;
             display: flex;
             justify-content: space-between;
             align-items: center;
         }
-        .chat-header h4 { font-size: 1rem; }
+        .chat-header h4 { font-size: 0.95rem; font-weight: 600; }
         .chat-close {
             background: none;
             border: none;
@@ -654,21 +942,18 @@
         .chat-message {
             max-width: 85%;
             padding: 12px 16px;
-            border-radius: 12px;
-            font-size: 0.9rem;
+            font-size: 0.87rem;
             line-height: 1.5;
         }
         .chat-message.bot {
             background: var(--gray-100);
-            color: var(--gray-900);
+            color: var(--gray-800);
             align-self: flex-start;
-            border-bottom-left-radius: 4px;
         }
         .chat-message.user {
-            background: var(--primary);
+            background: var(--cz-blue);
             color: white;
             align-self: flex-end;
-            border-bottom-right-radius: 4px;
         }
         .chat-suggestions {
             display: flex;
@@ -679,18 +964,19 @@
         .chat-suggestion {
             padding: 10px 14px;
             border: 1px solid var(--gray-200);
-            border-radius: var(--radius);
-            font-size: 0.85rem;
+            font-size: 0.82rem;
             cursor: pointer;
             transition: var(--transition);
             background: var(--white);
-            color: var(--gray-700);
+            color: var(--gray-600);
             text-align: left;
+            font-family: inherit;
+            font-weight: 500;
         }
         .chat-suggestion:hover {
-            background: var(--primary);
+            background: var(--cz-blue);
             color: white;
-            border-color: var(--primary);
+            border-color: var(--cz-blue);
         }
         .chat-input-area {
             padding: 14px;
@@ -702,191 +988,91 @@
             flex: 1;
             padding: 10px 14px;
             border: 1px solid var(--gray-200);
-            border-radius: var(--radius);
-            font-size: 0.9rem;
+            font-size: 0.87rem;
+            font-family: inherit;
             outline: none;
         }
-        .chat-input:focus { border-color: var(--primary); }
+        .chat-input:focus { border-color: var(--cz-blue); }
         .chat-send {
             padding: 10px 18px;
-            background: var(--primary);
+            background: var(--cz-blue);
             color: white;
             border: none;
-            border-radius: var(--radius);
             cursor: pointer;
             font-weight: 600;
         }
-
-        /* ===== TRANSITION BANNER ===== */
-        .transition-banner {
-            background: linear-gradient(135deg, #fff3e0, #ffe0b2);
-            border: 1px solid #ffb74d;
-            border-radius: var(--radius-lg);
-            padding: 28px;
-            margin-bottom: 28px;
-            display: flex;
-            gap: 20px;
-            align-items: flex-start;
-        }
-        .transition-banner .banner-icon {
-            font-size: 2rem;
-            flex-shrink: 0;
-        }
-        .transition-banner h3 {
-            font-size: 1.1rem;
-            color: #e65100;
-            margin-bottom: 6px;
-        }
-        .transition-banner p {
-            font-size: 0.9rem;
-            color: var(--gray-700);
-            margin-bottom: 12px;
-        }
-        .transition-banner a {
-            color: #e65100;
-            font-weight: 600;
-            text-decoration: none;
-        }
-        .transition-banner a:hover { text-decoration: underline; }
-
-        /* ===== CONTACT CARDS ===== */
-        .contacts-section { padding: 50px 0; background: var(--gray-100); }
-        .contacts-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 20px;
-        }
-        .contact-card {
-            background: var(--white);
-            border-radius: var(--radius-lg);
-            padding: 24px;
-            box-shadow: var(--shadow);
-            text-align: center;
-            transition: var(--transition);
-        }
-        .contact-card:hover {
-            box-shadow: var(--shadow-lg);
-            transform: translateY(-2px);
-        }
-        .contact-avatar {
-            width: 64px;
-            height: 64px;
-            border-radius: 50%;
-            background: var(--gray-200);
-            margin: 0 auto 14px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.5rem;
-            color: var(--gray-500);
-        }
-        .contact-card h4 { font-size: 1rem; color: var(--primary); margin-bottom: 4px; }
-        .contact-card .role { font-size: 0.85rem; color: var(--gray-500); margin-bottom: 12px; }
-        .contact-card .area {
-            display: inline-block;
-            padding: 4px 12px;
-            background: var(--gray-100);
-            border-radius: 4px;
-            font-size: 0.8rem;
-            color: var(--gray-700);
-            margin-bottom: 12px;
-        }
-        .contact-link {
-            display: block;
-            padding: 8px 16px;
-            background: var(--primary);
-            color: white;
-            border-radius: var(--radius);
-            text-decoration: none;
-            font-size: 0.85rem;
-            transition: var(--transition);
-        }
-        .contact-link:hover { background: var(--primary-light); }
+        .chat-send:hover { background: var(--cz-blue-dark); }
 
         /* ===== FOOTER ===== */
         footer {
             background: var(--gray-900);
             color: rgba(255,255,255,0.7);
-            padding: 40px 0 24px;
+            padding: 48px 0 24px;
         }
         .footer-grid {
             display: grid;
             grid-template-columns: 2fr 1fr 1fr 1fr;
-            gap: 32px;
+            gap: 40px;
             margin-bottom: 32px;
         }
         .footer-col h4 {
             color: white;
-            font-size: 0.95rem;
+            font-size: 0.82rem;
             margin-bottom: 14px;
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+            font-weight: 600;
         }
         .footer-col p, .footer-col a {
             font-size: 0.85rem;
-            color: rgba(255,255,255,0.6);
+            color: rgba(255,255,255,0.55);
             text-decoration: none;
             display: block;
             margin-bottom: 6px;
+            transition: var(--transition);
         }
         .footer-col a:hover { color: white; }
+        .footer-logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 16px;
+        }
+        .footer-logo .f-stripe {
+            width: 4px;
+            height: 32px;
+            background: var(--cz-blue);
+        }
+        .footer-logo .f-shield {
+            width: 24px;
+            height: 32px;
+            background: var(--cz-red);
+            margin-left: 1px;
+        }
+        .footer-logo span {
+            color: white;
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
         .footer-bottom {
-            border-top: 1px solid rgba(255,255,255,0.1);
+            border-top: 1px solid rgba(255,255,255,0.08);
             padding-top: 20px;
             display: flex;
             justify-content: space-between;
-            font-size: 0.8rem;
+            font-size: 0.78rem;
+            color: rgba(255,255,255,0.4);
         }
         .footer-links { display: flex; gap: 20px; }
-        .footer-links a { color: rgba(255,255,255,0.5); text-decoration: none; font-size: 0.8rem; }
+        .footer-links a {
+            color: rgba(255,255,255,0.4);
+            text-decoration: none;
+            font-size: 0.78rem;
+        }
         .footer-links a:hover { color: white; }
 
-        /* ===== BREADCRUMB ===== */
-        .breadcrumb {
-            padding: 14px 0;
-            font-size: 0.85rem;
-            color: var(--gray-500);
-        }
-        .breadcrumb a { color: var(--gray-500); text-decoration: none; }
-        .breadcrumb a:hover { color: var(--primary); }
-
-        /* ===== RESULTS SUMMARY ===== */
-        .results-bar {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 20px;
-            font-size: 0.9rem;
-            color: var(--gray-500);
-        }
-        .results-bar select {
-            padding: 8px 12px;
-            border: 1px solid var(--gray-200);
-            border-radius: var(--radius);
-            font-size: 0.85rem;
-        }
-
-        /* ===== PAGINATION ===== */
-        .pagination {
-            display: flex;
-            justify-content: center;
-            gap: 4px;
-            margin-top: 28px;
-        }
-        .pagination a {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 40px;
-            height: 40px;
-            border-radius: var(--radius);
-            text-decoration: none;
-            color: var(--gray-700);
-            font-size: 0.9rem;
-            transition: var(--transition);
-        }
-        .pagination a:hover { background: var(--gray-100); }
-        .pagination a.active { background: var(--primary); color: white; }
-
+        /* ===== RESPONSIVE ===== */
         @media (max-width: 768px) {
+            .container { padding: 0 16px; }
             nav ul { display: none; }
             .audience-cards { grid-template-columns: 1fr; }
             .content-grid { grid-template-columns: 1fr; }
@@ -895,6 +1081,7 @@
             .contacts-grid { grid-template-columns: 1fr; }
             .footer-grid { grid-template-columns: 1fr; }
             .chatbot-window { width: calc(100% - 32px); right: 16px; }
+            .hero h1 { font-size: 1.8rem; }
         }
     </style>
 </head>
@@ -903,9 +1090,15 @@
 <!-- TOP BAR -->
 <div class="top-bar">
     <div class="container">
-        <a href="#">Úřední deska</a>
-        <a href="#">Kontakty</a>
-        <a href="#">EN</a>
+        <div class="gov-label">
+            <svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor"><rect width="16" height="5.3" fill="#fff"/><rect y="5.3" width="16" height="5.3" fill="#d80c13"/><rect y="10.7" width="16" height="5.3" fill="#08437f"/></svg>
+            Státní správa České republiky
+        </div>
+        <div class="top-bar-left">
+            <a href="#">Úřední deska</a>
+            <a href="#">Kontakty</a>
+            <a href="#">EN</a>
+        </div>
     </div>
 </div>
 
@@ -914,10 +1107,18 @@
     <div class="container">
         <div class="header-inner">
             <a href="#" class="logo">
-                <div class="logo-icon">ÚRÚ</div>
+                <div class="logo-mark">
+                    <div class="logo-stripe"></div>
+                    <div class="logo-shield">
+                        <!-- Stylizovaný lev – zjednodušená ikona -->
+                        <svg viewBox="0 0 24 32" fill="white">
+                            <path d="M12 2C8 2 4 6 4 10c0 3 2 5 3 7l1 2c0 1-1 2-1 3 0 2 1 4 2 5l3 3 3-3c1-1 2-3 2-5 0-1-1-2-1-3l1-2c1-2 3-4 3-7 0-4-4-8-8-8zm-2 8c-1 0-2-1-2-2s1-2 2-2 2 1 2 2-1 2-2 2zm4 0c-1 0-2-1-2-2s1-2 2-2 2 1 2 2-1 2-2 2z"/>
+                        </svg>
+                    </div>
+                </div>
                 <div class="logo-text">
-                    <strong>Úřad rozvoje území</strong>
-                    <span>České republiky</span>
+                    <span class="institution">Úřad rozvoje území</span>
+                    <span class="country">České republiky</span>
                 </div>
             </a>
             <nav>
@@ -969,17 +1170,23 @@
         </div>
         <div class="audience-cards">
             <div class="audience-card active" onclick="selectAudience(this)">
-                <div class="icon">&#9878;</div>
+                <div class="card-icon">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 21h18M3 7v14M21 7v14M6 7V4l6-2 6 2v3M9 21v-4h6v4M9 11h.01M15 11h.01M9 15h.01M15 15h.01"/></svg>
+                </div>
                 <h3>Stavební úřady</h3>
                 <p>Výklady nového stavebního zákona, metodická stanoviska, přechodová ustanovení, vzory dokumentů</p>
             </div>
             <div class="audience-card" onclick="selectAudience(this)">
-                <div class="icon">&#9881;</div>
+                <div class="card-icon">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2M9 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM22 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+                </div>
                 <h3>Dotčené orgány</h3>
                 <p>Změny v typech vyjádření, integrace do řízení, zrušení JES, nové postupy od 1. 7. 2026</p>
             </div>
             <div class="audience-card" onclick="selectAudience(this)">
-                <div class="icon">&#9962;</div>
+                <div class="card-icon">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
+                </div>
                 <h3>Územní plánování</h3>
                 <p>Metodika pro obce jako pořizovatele územních plánů, podklady, kontakty na garanty</p>
             </div>
@@ -993,7 +1200,7 @@
 
         <!-- TRANSITION BANNER -->
         <div class="transition-banner">
-            <div class="banner-icon">&#9888;</div>
+            <div class="banner-icon">!</div>
             <div>
                 <h3>Přechodové období – k 1. 7. 2026</h3>
                 <p>Jak se mění řízení zahájená před 1. 7. 2026? Co platí pro rozdělaná řízení? Jaké jsou nové povinnosti? Přehled klíčových změn a instrukcí pro přechodové období.</p>
@@ -1004,7 +1211,7 @@
         <div class="content-grid">
             <!-- SIDEBAR -->
             <aside class="sidebar">
-                <h3>Filtrovat dokumenty</h3>
+                <h3>Filtrovat</h3>
 
                 <div class="filter-group">
                     <label>Oblast práva</label>
@@ -1067,23 +1274,21 @@
 
             <!-- CONTENT -->
             <div class="main-content">
-                <!-- CONTENT TYPE TABS -->
                 <div class="content-tabs">
                     <button class="content-tab active" onclick="switchTab(this, 'documents')">
-                        &#128196; Dokumenty <span class="badge">47</span>
+                        Dokumenty <span class="badge">47</span>
                     </button>
                     <button class="content-tab" onclick="switchTab(this, 'faq')">
-                        &#10067; FAQ <span class="badge">23</span>
+                        FAQ <span class="badge">23</span>
                     </button>
                     <button class="content-tab" onclick="switchTab(this, 'video')">
-                        &#127909; Video <span class="badge">8</span>
+                        Video <span class="badge">8</span>
                     </button>
                     <button class="content-tab" onclick="switchTab(this, 'podcast')">
-                        &#127911; Podcasty <span class="badge">5</span>
+                        Podcasty <span class="badge">5</span>
                     </button>
                 </div>
 
-                <!-- RESULTS BAR -->
                 <div class="results-bar">
                     <span>Zobrazeno <strong>47 dokumentů</strong> pro oblast: <strong>Stavební úřady</strong></span>
                     <select>
@@ -1093,19 +1298,18 @@
                     </select>
                 </div>
 
-                <!-- DOCUMENT LIST -->
                 <div class="doc-list" id="content-documents">
                     <div class="doc-card">
                         <div class="doc-card-header">
                             <div>
                                 <h4><a href="#">Výklad k § 172 odst. 3 stavebního zákona – stavební povolení pro OZE</a></h4>
                                 <div class="doc-meta">
-                                    <span>&#128197; 15. 2. 2026</span>
-                                    <span>&#128221; Výkladové stanovisko</span>
-                                    <span>&#128100; Oddělení metodiky SR</span>
+                                    <span>15. 2. 2026</span>
+                                    <span>Výkladové stanovisko</span>
+                                    <span>Oddělení metodiky SR</span>
                                 </div>
                             </div>
-                            <span class="doc-status platne">&#10003; Platné</span>
+                            <span class="doc-status platne">Platné</span>
                         </div>
                         <p class="doc-excerpt">
                             Stanovisko řeší otázku věcné příslušnosti u fotovoltaických elektráren s výkonem nad 1 MW a bateriových úložišť. Upřesňuje hranici mezi kompetencí obecného stavebního úřadu a ÚRÚ po 1. 7. 2026.
@@ -1117,9 +1321,9 @@
                             <span class="doc-tag">§ 172</span>
                         </div>
                         <div class="doc-format">
-                            <a href="#" class="format-btn pdf">&#128196; PDF (1.2 MB)</a>
-                            <a href="#" class="format-btn video">&#9654; Video výklad (12 min)</a>
-                            <a href="#" class="format-btn">&#128279; Související dokumenty (3)</a>
+                            <a href="#" class="format-btn pdf">PDF (1.2 MB)</a>
+                            <a href="#" class="format-btn video">Video výklad (12 min)</a>
+                            <a href="#" class="format-btn">Související (3)</a>
                         </div>
                     </div>
 
@@ -1128,12 +1332,12 @@
                             <div>
                                 <h4><a href="#">Metodický pokyn k přechodnému období – řízení zahájená před 1. 7. 2026</a></h4>
                                 <div class="doc-meta">
-                                    <span>&#128197; 28. 1. 2026</span>
-                                    <span>&#128221; Metodický pokyn</span>
-                                    <span>&#128100; Ředitel úřadu</span>
+                                    <span>28. 1. 2026</span>
+                                    <span>Metodický pokyn</span>
+                                    <span>Ředitel úřadu</span>
                                 </div>
                             </div>
-                            <span class="doc-status platne">&#10003; Platné</span>
+                            <span class="doc-status platne">Platné</span>
                         </div>
                         <p class="doc-excerpt">
                             Komplexní pokyn k postupu u řízení zahájených před nabytím účinnosti nového stavebního zákona. Řeší předání spisů, pokračování v řízení a aplikaci přechodných ustanovení.
@@ -1143,9 +1347,9 @@
                             <span class="doc-tag">Procesní postup</span>
                         </div>
                         <div class="doc-format">
-                            <a href="#" class="format-btn pdf">&#128196; PDF (2.8 MB)</a>
-                            <a href="#" class="format-btn">&#128196; Příloha – vzorové dokumenty</a>
-                            <a href="#" class="format-btn video">&#9654; Video výklad (18 min)</a>
+                            <a href="#" class="format-btn pdf">PDF (2.8 MB)</a>
+                            <a href="#" class="format-btn">Příloha – vzory</a>
+                            <a href="#" class="format-btn video">Video výklad (18 min)</a>
                         </div>
                     </div>
 
@@ -1154,12 +1358,12 @@
                             <div>
                                 <h4><a href="#">Integrace dotčených orgánů do stavebního řízení – praktický průvodce</a></h4>
                                 <div class="doc-meta">
-                                    <span>&#128197; 10. 1. 2026</span>
-                                    <span>&#128221; Informační materiál</span>
-                                    <span>&#128100; Oddělení metodiky SR</span>
+                                    <span>10. 1. 2026</span>
+                                    <span>Informační materiál</span>
+                                    <span>Oddělení metodiky SR</span>
                                 </div>
                             </div>
-                            <span class="doc-status platne">&#10003; Platné</span>
+                            <span class="doc-status platne">Platné</span>
                         </div>
                         <p class="doc-excerpt">
                             Praktický průvodce novou rolí dotčených orgánů po zrušení JES. Vysvětluje rozdíl mezi závazným stanoviskem a vyjádřením, nové lhůty a procesní důsledky.
@@ -1170,9 +1374,9 @@
                             <span class="doc-tag">Integrace DO</span>
                         </div>
                         <div class="doc-format">
-                            <a href="#" class="format-btn pdf">&#128196; PDF (950 KB)</a>
-                            <a href="#" class="format-btn video">&#9654; Video výklad (15 min)</a>
-                            <a href="#" class="format-btn">&#127911; Podcast (22 min)</a>
+                            <a href="#" class="format-btn pdf">PDF (950 KB)</a>
+                            <a href="#" class="format-btn video">Video výklad (15 min)</a>
+                            <a href="#" class="format-btn">Podcast (22 min)</a>
                         </div>
                     </div>
 
@@ -1181,12 +1385,12 @@
                             <div>
                                 <h4><a href="#">Výklad k územnímu řízení – úpravy pro obce do 5000 obyvatel</a></h4>
                                 <div class="doc-meta">
-                                    <span>&#128197; 5. 12. 2025</span>
-                                    <span>&#128221; Výkladové stanovisko</span>
-                                    <span>&#128100; Oddělení územního plánování</span>
+                                    <span>5. 12. 2025</span>
+                                    <span>Výkladové stanovisko</span>
+                                    <span>Oddělení územního plánování</span>
                                 </div>
                             </div>
-                            <span class="doc-status nahrazene">&#8635; Nahrazeno</span>
+                            <span class="doc-status nahrazene">Nahrazeno</span>
                         </div>
                         <p class="doc-excerpt">
                             Původní výklad k postupu obcí jako pořizovatelů územních plánů. Nahrazeno aktualizovaným stanoviskem ze dne 20. 2. 2026.
@@ -1196,13 +1400,12 @@
                             <span class="doc-tag">Obce</span>
                         </div>
                         <div class="doc-format">
-                            <a href="#" class="format-btn pdf">&#128196; PDF (780 KB)</a>
-                            <a href="#" class="format-btn">&#128279; Nahrazující dokument</a>
+                            <a href="#" class="format-btn pdf">PDF (780 KB)</a>
+                            <a href="#" class="format-btn">Nahrazující dokument</a>
                         </div>
                     </div>
                 </div>
 
-                <!-- PAGINATION -->
                 <div class="pagination">
                     <a href="#" class="active">1</a>
                     <a href="#">2</a>
@@ -1299,7 +1502,7 @@
             <div class="media-card">
                 <div class="media-thumbnail">
                     <div class="play-btn">&#9654;</div>
-                    <span class="media-badge">&#127909; Video</span>
+                    <span class="media-badge">Video</span>
                     <span class="media-duration">12:34</span>
                 </div>
                 <div class="media-body">
@@ -1309,9 +1512,9 @@
             </div>
 
             <div class="media-card">
-                <div class="media-thumbnail" style="background: linear-gradient(135deg, #2e7d32 0%, #4caf50 100%);">
+                <div class="media-thumbnail podcast">
                     <div class="play-btn">&#9654;</div>
-                    <span class="media-badge">&#127911; Podcast</span>
+                    <span class="media-badge">Podcast</span>
                     <span class="media-duration">22:15</span>
                 </div>
                 <div class="media-body">
@@ -1321,9 +1524,9 @@
             </div>
 
             <div class="media-card">
-                <div class="media-thumbnail" style="background: linear-gradient(135deg, #c62828 0%, #ef5350 100%);">
+                <div class="media-thumbnail" style="background: var(--cz-red);">
                     <div class="play-btn">&#9654;</div>
-                    <span class="media-badge">&#127909; Video</span>
+                    <span class="media-badge">Video</span>
                     <span class="media-duration">8:45</span>
                 </div>
                 <div class="media-body">
@@ -1333,9 +1536,9 @@
             </div>
 
             <div class="media-card">
-                <div class="media-thumbnail" style="background: linear-gradient(135deg, #e65100 0%, #ff9800 100%);">
+                <div class="media-thumbnail">
                     <div class="play-btn">&#9654;</div>
-                    <span class="media-badge">&#127909; Video</span>
+                    <span class="media-badge">Video</span>
                     <span class="media-duration">15:20</span>
                 </div>
                 <div class="media-body">
@@ -1345,9 +1548,9 @@
             </div>
 
             <div class="media-card">
-                <div class="media-thumbnail" style="background: linear-gradient(135deg, #1565c0 0%, #42a5f5 100%);">
+                <div class="media-thumbnail podcast">
                     <div class="play-btn">&#9654;</div>
-                    <span class="media-badge">&#127911; Podcast</span>
+                    <span class="media-badge">Podcast</span>
                     <span class="media-duration">28:30</span>
                 </div>
                 <div class="media-body">
@@ -1357,9 +1560,9 @@
             </div>
 
             <div class="media-card">
-                <div class="media-thumbnail" style="background: linear-gradient(135deg, #6a1b9a 0%, #ab47bc 100%);">
+                <div class="media-thumbnail">
                     <div class="play-btn">&#9654;</div>
-                    <span class="media-badge">&#127909; Video</span>
+                    <span class="media-badge">Video</span>
                     <span class="media-duration">10:12</span>
                 </div>
                 <div class="media-body">
@@ -1381,21 +1584,27 @@
 
         <div class="contacts-grid">
             <div class="contact-card">
-                <div class="contact-avatar">&#128100;</div>
+                <div class="contact-avatar">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2M12 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8z"/></svg>
+                </div>
                 <h4>Ing. Jana Nováková</h4>
                 <div class="role">Vedoucí oddělení metodiky SR</div>
                 <div class="area">Stavební řád – obecné postupy</div>
                 <a href="#" class="contact-link">Kontaktovat</a>
             </div>
             <div class="contact-card">
-                <div class="contact-avatar">&#128100;</div>
+                <div class="contact-avatar">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2M12 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8z"/></svg>
+                </div>
                 <h4>Mgr. Petr Dvořák</h4>
                 <div class="role">Metodik</div>
                 <div class="area">Dotčené orgány, integrace DO</div>
                 <a href="#" class="contact-link">Kontaktovat</a>
             </div>
             <div class="contact-card">
-                <div class="contact-avatar">&#128100;</div>
+                <div class="contact-avatar">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2M12 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8z"/></svg>
+                </div>
                 <h4>Ing. arch. Marie Svobodová</h4>
                 <div class="role">Vedoucí oddělení ÚP</div>
                 <div class="area">Územní plánování</div>
@@ -1410,7 +1619,11 @@
     <div class="container">
         <div class="footer-grid">
             <div class="footer-col">
-                <h4>Úřad rozvoje území České republiky</h4>
+                <div class="footer-logo">
+                    <div class="f-stripe"></div>
+                    <div class="f-shield"></div>
+                    <span>Úřad rozvoje území</span>
+                </div>
                 <p>Zelený pruh 1294/52<br>147 00 Praha 4</p>
                 <p style="margin-top: 10px;">IČO: 12345678<br>Datová schránka: abc1234</p>
             </div>
@@ -1455,7 +1668,7 @@
 
 <div class="chatbot-window" id="chatWindow">
     <div class="chat-header">
-        <h4>&#129302; Metodický asistent ÚRÚ</h4>
+        <h4>Metodický asistent ÚRÚ</h4>
         <button class="chat-close" onclick="toggleChat()">&times;</button>
     </div>
     <div class="chat-body">
@@ -1503,11 +1716,9 @@
         userMsg.textContent = btn.textContent;
         chatBody.appendChild(userMsg);
 
-        // Remove suggestions after first click
         const suggestions = chatBody.querySelector('.chat-suggestions');
         if (suggestions) suggestions.style.display = 'none';
 
-        // Simulate bot response
         setTimeout(() => {
             const botMsg = document.createElement('div');
             botMsg.className = 'chat-message bot';
@@ -1519,7 +1730,6 @@
         chatBody.scrollTop = chatBody.scrollHeight;
     }
 
-    // Filter tag toggle
     document.querySelectorAll('.filter-tag').forEach(tag => {
         tag.addEventListener('click', () => {
             tag.parentElement.querySelectorAll('.filter-tag').forEach(t => t.classList.remove('active'));
@@ -1527,7 +1737,6 @@
         });
     });
 
-    // Hero tag click
     document.querySelectorAll('.hero-tag').forEach(tag => {
         tag.addEventListener('click', () => {
             document.querySelector('.search-bar input').value = tag.textContent;

@@ -616,6 +616,8 @@ nav a.active {
 .format-btn.pdf:hover { background: var(--cz-red-light); }
 .format-btn.video { border-color: var(--cz-blue); color: var(--cz-blue); }
 .format-btn.video:hover { background: var(--cz-blue-light); }
+.format-btn.infographic { border-color: #027a48; color: #027a48; }
+.format-btn.infographic:hover { background: #ecfdf3; }
 
 /* LOADING & NO RESULTS */
 .loading-msg, .no-results {

@@ -128,11 +128,17 @@ function renderDocuments() {
         if (doc.pdfFile) {
             const sizeStr = doc.pdfSize ? ` (${doc.pdfSize})` : '';
             formats += `<a href="${doc.pdfFile}" class="format-btn pdf" target="_blank">PDF${sizeStr}</a>`;
-        } else if (doc.sourceUrl) {
-            formats += `<a href="${doc.sourceUrl}" class="format-btn" target="_blank">Zdroj – ÚÚR</a>`;
         }
-        if (doc.videoId) {
+        if (doc.infographic) {
+            formats += `<a href="${doc.infographic}" class="format-btn infographic" target="_blank">Infografika</a>`;
+        }
+        if (doc.videoFile) {
+            formats += `<a href="${doc.videoFile}" class="format-btn video" target="_blank">Video (MP4)</a>`;
+        } else if (doc.videoId) {
             formats += `<a href="pages/video.html?id=${doc.videoId}" class="format-btn video">Video výklad</a>`;
+        }
+        if (!doc.pdfFile && doc.sourceUrl) {
+            formats += `<a href="${doc.sourceUrl}" class="format-btn" target="_blank">Zdroj – ÚÚR</a>`;
         }
 
         return `
